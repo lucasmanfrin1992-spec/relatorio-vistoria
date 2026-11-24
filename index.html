@@ -152,7 +152,9 @@ input:focus-visible,select:focus-visible,textarea:focus-visible,button:focus-vis
 .issues li.allok{background:var(--ok-soft);color:var(--ok)}
 .issues li.allok::before{content:"✓";background:var(--ok)}
 .bigbtn{font:700 17px var(--f-display);padding:13px 22px;min-height:52px}
-.status{font-size:15px;min-height:1.3em}
+.pdfbtn{border:2px solid var(--accent);color:var(--accent);background:var(--surface)}
+.pdfbtn:hover{background:var(--accent-soft)}
+.status{flex-basis:100%;font-size:15px;min-height:1.3em}
 .status.ok{color:var(--ok);font-weight:600} .status.err{color:var(--danger)}
 /* pré-visualização */
 .pv{position:sticky;top:76px;display:flex;flex-direction:column;gap:10px}
@@ -188,11 +190,12 @@ input:focus-visible,select:focus-visible,textarea:focus-visible,button:focus-vis
     <div>
       <span class="unit">SG-SI-CED-DOR · Divisão de Obras de Reformas e Conservação de Edifícios</span>
       <h1>Relatório de Vistoria</h1>
-      <p>Escolha o local, descreva a vistoria, inclua as fotos com legenda e gere o .docx no modelo da Divisão.</p>
+      <p>Escolha o local, descreva a vistoria, inclua as fotos com legenda e gere o .docx ou o PDF no modelo da Divisão.</p>
     </div>
     <div class="actions">
       <span class="save-state" id="saveState">Rascunho salvo neste navegador</span>
       <span id="newWrap"><button class="btn ghost" id="btnNew" type="button">Novo relatório</button></span>
+      <button class="btn" id="btnPdfTop" type="button">Gerar PDF</button>
       <button class="btn primary" id="btnGenTop" type="button">Gerar .docx</button>
     </div>
   </div>
@@ -280,10 +283,10 @@ input:focus-visible,select:focus-visible,textarea:focus-visible,button:focus-vis
   </section>
 
   <section class="step gen" id="st7" aria-labelledby="s7">
-    <div class="step-h"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5"/><path d="M4 19h16"/></svg></span><h2 id="s7">Gerar documento</h2></div>
+    <div class="step-h"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5"/><path d="M4 19h16"/></svg></span><h2 id="s7">Gerar documento</h2><span class="sub">.docx para editar no Word · PDF pronto para anexar no SEI</span></div>
     <label class="f">Nome do arquivo<input type="text" id="fName" class="mono"></label>
     <ul class="issues" id="issues"></ul>
-    <div class="row"><button class="btn primary bigbtn" id="btnGen" type="button">Gerar relatório .docx</button><span class="status" id="genStatus" role="status"></span></div>
+    <div class="row"><button class="btn primary bigbtn" id="btnGen" type="button">Gerar relatório .docx</button><button class="btn bigbtn pdfbtn" id="btnPdf" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6"/></svg>Gerar PDF</button><span class="status" id="genStatus" role="status"></span></div>
   </section>
 </div>
 
@@ -295,6 +298,7 @@ input:focus-visible,select:focus-visible,textarea:focus-visible,button:focus-vis
 <p class="foot">Campos obrigatórios vazios saem no documento como <b>[INDICAR …]</b> realçados em amarelo, para não passarem despercebidos. As fotos são reduzidas para 1600 px no lado maior antes de entrar no .docx. Nada é enviado a servidores: o rascunho, as fotos e os assinantes ficam guardados só neste navegador.</p>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script>
 (function(){
 "use strict";
@@ -535,17 +539,104 @@ function buildDocx(){var zip;return JSZip.loadAsync(TPL,{base64:true}).then(func
   return zip.generateAsync({type:"blob",mimeType:"application/vnd.openxmlformats-officedocument.wordprocessingml.document",compression:"DEFLATE"})})}
 function status(t,c){var s=$("genStatus");s.textContent=t;s.className="status "+(c||"")}
 var dl=null;
-function fname(){var n=$("fName").value.trim()||"Relatorio_de_Vistoria.docx";if(!/\.docx$/i.test(n))n+=".docx";return n}
-function generate(){if(!window.JSZip){status("Não foi possível carregar o gerador (JSZip). Verifique a conexão e recarregue a página.","err");return}
-  $("btnGen").disabled=true;$("btnGenTop").disabled=true;status("Gerando documento…","");
+function fname(ext){var n=$("fName").value.trim()||"Relatorio_de_Vistoria.docx";n=n.replace(/\.(docx|pdf)$/i,"");return n+"."+ext}
+var GBTN=["btnGen","btnGenTop","btnPdf","btnPdfTop"];
+function busy(on){GBTN.forEach(function(id){var b=$(id);if(b)b.disabled=on})}
+function deliver(builder,ext,label){
+  busy(true);status("Gerando "+label+"…","");
   var inClaude=!!(window.claude&&window.claude.use);
   var dlP=dl?Promise.resolve(dl):inClaude?window.claude.use("downloads").then(function(n){dl=n||null;return dl},function(){return null}):Promise.resolve(null);
-  Promise.all([buildDocx(),dlP]).then(function(r){var blob=r[0],sv=r[1],n=fname();
-    if(sv){status("Confirme o download na janela que abriu…","");return sv.save({filename:n,data:blob}).then(function(){status("Documento gerado: "+n,"ok")},function(e){var c=e&&e.code;status(c==="declined"?"Download cancelado.":c==="rate_limited"?"Já há uma confirmação aberta. Conclua-a e tente de novo.":c==="too_large"?"Arquivo grande demais para esta visualização. Reduza o número de fotos.":"Não foi possível salvar o arquivo ("+(c||"erro")+"). Abra o gerador pelo link no claude.ai e tente de novo.","err")})}
-    if(inClaude){status("Download indisponível nesta visualização. Abra o gerador pelo link do artifact no claude.ai (navegador) e gere de novo — o rascunho fica salvo.","err");return}
-    var a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=n;document.body.appendChild(a);a.click();setTimeout(function(){URL.revokeObjectURL(a.href);a.remove()},4000);status("Documento gerado: "+n,"ok")
-  }).catch(function(e){status("Erro ao gerar: "+(e&&e.message||e),"err")}).then(function(){$("btnGen").disabled=false;$("btnGenTop").disabled=false})}
-$("btnGen").onclick=generate;$("btnGenTop").onclick=function(){$("st7").scrollIntoView({behavior:"smooth",block:"center"});generate()};
+  Promise.all([builder(),dlP]).then(function(r){var blob=r[0],sv=r[1],n=fname(ext);
+    if(sv){status("Confirme o download na janela que abriu…","");return sv.save({filename:n,data:blob}).then(function(){status(label+" gerado: "+n,"ok")},function(e){var c=e&&e.code;status(c==="declined"?"Download cancelado.":c==="rate_limited"?"Já há uma confirmação aberta. Conclua-a e tente de novo.":c==="too_large"?"Arquivo grande demais para esta visualização. Reduza o número de fotos.":"Não foi possível salvar o arquivo ("+(c||"erro")+").","err")})}
+    if(inClaude){status("Download indisponível nesta visualização. Abra o gerador pelo link no navegador e gere de novo — o rascunho fica salvo.","err");return}
+    var a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=n;document.body.appendChild(a);a.click();setTimeout(function(){URL.revokeObjectURL(a.href);a.remove()},4000);status(label+" gerado: "+n,"ok")
+  }).catch(function(e){status("Erro ao gerar: "+(e&&e.message||e),"err")}).then(function(){busy(false)})}
+function generate(){if(!window.JSZip){status("Não foi possível carregar o gerador de .docx. Verifique a conexão e recarregue a página.","err");return}deliver(buildDocx,"docx","Documento .docx")}
+function generatePdf(){if(!(window.jspdf&&window.jspdf.jsPDF)){status("Não foi possível carregar o gerador de PDF. Verifique a conexão e recarregue a página.","err");return}deliver(buildPdf,"pdf","PDF")}
+$("btnGen").onclick=generate;$("btnPdf").onclick=generatePdf;
+$("btnGenTop").onclick=function(){$("st7").scrollIntoView({behavior:"smooth",block:"center"});generate()};
+$("btnPdfTop").onclick=function(){$("st7").scrollIntoView({behavior:"smooth",block:"center"});generatePdf()};
+
+/* ---------- PDF (mesmo layout do modelo .docx) ---------- */
+function blobURL(b){return new Promise(function(res,rej){var r=new FileReader();r.onload=function(){res(r.result)};r.onerror=rej;r.readAsDataURL(b)})}
+function buildPdf(){
+  var J=window.jspdf&&window.jspdf.jsPDF;if(!J)return Promise.reject(new Error("biblioteca de PDF não carregada"));
+  return Promise.all(S.photos.map(function(p){return blobURL(p.blob)})).then(function(imgs){
+  var doc=new J({unit:"mm",format:"a4",compress:true});
+  var PW=210,PH=297,ML=30,MR=19,MT=40,MB=22,CW=PW-ML-MR,PT=0.3528,y=MT;
+  var F="helvetica";
+  function header(){try{doc.addImage(HDR,"JPEG",ML,12.5,155.8,23.07)}catch(e){}}
+  function newPage(){doc.addPage();header();y=MT}
+  function need(hh){if(y+hh>PH-MB)newPage()}
+  function words(runs){var w=[];runs.forEach(function(r){String(r.t).split("\n").forEach(function(seg,k){if(k)w.push({br:1});seg.split(/ +/).forEach(function(t){if(t)w.push({t:t,b:!!r.b,hl:!!r.hl})})})});return w}
+  /* dispõe texto com negrito/realce; align: left|center|justify. Retorna a altura. dry=true só mede. */
+  function flow(runs,o){o=o||{};var size=o.size||10.5,lh=size*PT*(o.line||1.25),al=o.align||"left",x0=o.x==null?ML:o.x,w=o.w||CW,dry=!!o.dry,yy=o.y==null?y:o.y,h0=yy;
+    doc.setFontSize(size);var ws=words(runs),lines=[],cur=[],cw=0;
+    function wid(t,b){doc.setFont(F,b?"bold":"normal");return doc.getTextWidth(t)}
+    var sp=wid(" ",false);
+    ws.forEach(function(x){if(x.br){lines.push({w:cur,last:true});cur=[];cw=0;return}x.wd=wid(x.t,x.b);var add=(cur.length?sp:0)+x.wd;if(cur.length&&cw+add>w){lines.push({w:cur,last:false});cur=[x];cw=x.wd}else{cur.push(x);cw+=add}});
+    lines.push({w:cur,last:true});
+    lines.forEach(function(L){
+      if(!dry&&o.y==null){if(y+lh>PH-MB){newPage();yy=y}}
+      if(!dry){var tot=L.w.reduce(function(s,x){return s+x.wd},0),n=L.w.length,gap=sp,x=x0;
+        if(al==="justify"&&!L.last&&n>1)gap=(w-tot)/(n-1);
+        else if(al==="center")x=x0+(w-(tot+sp*(n-1)))/2;
+        var base=yy+size*PT*0.92;
+        L.w.forEach(function(it,i){if(it.hl){var ext=(i<n-1&&L.w[i+1].hl)?gap:0;doc.setFillColor(255,242,122);doc.rect(x-0.3,yy+size*PT*0.12,it.wd+ext+0.6,size*PT*1.06,"F")}
+          doc.setFont(F,it.b?"bold":"normal");doc.setTextColor(29,29,29);doc.text(it.t,x,base);x+=it.wd+gap})}
+      yy+=lh;if(o.y==null&&!dry)y=yy});
+    return yy-h0}
+  function gapAfter(pt){y+=pt*PT}
+  function sep(){need(6);doc.setDrawColor(0);doc.setLineWidth(0.18);doc.line(ML,y+1.5,PW-MR,y+1.5);y+=4.5}
+  function empty(){y+=11*PT*1.08+8*PT}
+  function head(t){need(11*PT*1.25*3+6);flow([{t:t,b:true}],{size:11,line:1.1});gapAfter(8)}
+  function idl(lab,val,ph){flow([{t:lab+": ",b:true},val?{t:val}:{t:"[INDICAR "+ph+"]",hl:true}],{size:11,line:1.08});gapAfter(8)}
+  function txt(t,ph){var ps=paras(t);if(!ps.length)ps=[null];ps.forEach(function(p){flow(p==null?[{t:"["+ph+"]",hl:true}]:[{t:p}],{size:10.5,line:1.25,align:"justify"});gapAfter(6)})}
+
+  header();
+  flow([{t:"RELATÓRIO DE VISTORIA",b:true}],{size:11,align:"center",line:1.5});gapAfter(8);
+  sep();head("1. IDENTIFICAÇÃO");
+  var e=curEd();
+  idl("OBRA / SERVIÇO",$("fObra").value.trim(),"OBRA/SERVIÇO");
+  idl("COMARCA/REGIONAL",$("fComReg").value.trim(),"COMARCA");
+  if(S.cEnd)idl("ENDEREÇO",$("fEnd").value.trim(),"ENDEREÇO");
+  if(S.cSit&&e&&e.s)idl("SITUAÇÃO DO IMÓVEL",e.s,"SITUAÇÃO");
+  if($("fContrato").value.trim())idl("CONTRATO",$("fContrato").value.trim(),"");
+  if($("fEmpresa").value.trim())idl("CONTRATADA",$("fEmpresa").value.trim(),"");
+  idl("PROTOCOLO SEI",$("fSei").value.trim(),"Nº SEI");
+  idl("PERÍODO",periodo(),"DATA");
+  idl("FISCAL",$("fFiscal").value.trim(),"FISCAL");
+  empty();sep();head("2. OBJETIVO");txt($("fObj").value,"INDICAR OBJETIVO");
+  empty();sep();head("3. RELATÓRIO");txt($("fRel").value,"DESCREVER A VISTORIA");
+
+  if(S.photos.length){empty();
+    var two=S.size==="S",colW=two?CW/2:CW,box=S.size==="L"?[154,118]:S.size==="M"?[140,90]:[74,56],pad=1.9;
+    function capRuns(p,i){var c=p.cap.trim();return [{t:"Foto "+nn(i)+" - "},c?{t:c}:{t:"[INDICAR LEGENDA]",hl:true}]}
+    function cellH(p,i){var k=Math.min(box[0]/p.w,box[1]/p.h,(colW-2*pad)/p.w);var ih=p.h*k;return {k:k,ih:ih,h:1+ih+1+flow(capRuns(p,i),{size:10.5,line:1.15,w:colW-2*pad,dry:true})+1.6}}
+    function drawCell(p,i,x,top,m,rowH){var iw=p.w*m.k;doc.addImage(imgs[i],"JPEG",x+(colW-iw)/2,top+1,iw,m.ih,"foto"+i,"FAST");
+      flow(capRuns(p,i),{size:10.5,line:1.15,align:"justify",x:x+pad,w:colW-2*pad,y:top+1+m.ih+1});
+      doc.setDrawColor(0);doc.setLineWidth(0.18);doc.rect(x,top,colW,rowH)}
+    var r0=cellH(S.photos[0],0).h;if(two&&S.photos[1])r0=Math.max(r0,cellH(S.photos[1],1).h);
+    if(y+4.5+11*PT*1.1+8*PT+r0>PH-MB)newPage();sep();head("4. FOTOS");
+    for(var i=0;i<S.photos.length;i+=(two?2:1)){
+      var a=cellH(S.photos[i],i),b=two&&S.photos[i+1]?cellH(S.photos[i+1],i+1):null,rh=Math.max(a.h,b?b.h:0);
+      if(y+rh>PH-MB)newPage();
+      drawCell(S.photos[i],i,ML,y,a,rh);
+      if(two){if(b)drawCell(S.photos[i+1],i+1,ML+colW,y,b,rh);else{doc.setDrawColor(0);doc.setLineWidth(0.18);doc.rect(ML+colW,y,colW,rh)}}
+      y+=rh}
+  }
+  empty();sep();
+  need(30);
+  flow([{t:"É o relatório."}],{size:11,align:"center",line:1.08});gapAfter(8);
+  var dr=$("fDataRel").value||$("fData").value;
+  flow([{t:($("fLocal").value.trim()||"Curitiba")+", "},dr?{t:extenso(dr)+"."}:{t:"[INDICAR DATA]",hl:true}],{size:11,align:"center",line:1.08});gapAfter(8);
+  S.sigs.filter(function(s){return s.on&&s.l1.trim()}).forEach(function(s){need(22);empty();flow([{t:s.l1.trim()}],{size:11,align:"center",line:1.0});if(s.l2.trim())flow([{t:s.l2.trim()}],{size:11,align:"center",line:1.0})});
+
+  var n=doc.getNumberOfPages();for(var pg=1;pg<=n;pg++){doc.setPage(pg);doc.setFont(F,"normal");doc.setFontSize(11);doc.setTextColor(29,29,29);doc.text(String(pg),PW/2,PH-11,{align:"center"})}
+  var who=($("fFiscal").value||"").replace(/^Eng\.\s*/,"");
+  doc.setProperties({title:"Relatório de Vistoria – "+$("fObra").value,author:who,creator:"Gerador de Relatório de Vistoria – DOR/TJPR"});
+  return doc.output("blob");
+  })}
 
 /* ---------- persistence (IndexedDB, por navegador) ---------- */
 var idb=null;
