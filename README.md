@@ -11,7 +11,10 @@ Ferramenta web para gerar o **Relatório de Vistoria (.docx ou PDF)** no modelo 
 4. Inclua as fotos com legenda (arraste para reordenar).
 5. Informe os assinantes e clique em **Gerar relatório .docx** (para editar no Word) ou **Gerar PDF** (pronto para anexar no SEI).
 
-Campos obrigatórios vazios saem no documento como **[INDICAR …]** realçados em amarelo.
+Campos obrigatórios vazios saem no documento como **[INDICAR …]** com fundo âmbar.
+
+## Modelo visual
+Segue o Manual de Uso da marca TJPR: cabeçalho com a marca horizontal e o texto da unidade (editável no app), cores institucionais (#002a3a, #008c95), Identificação em tabela e quadro de fotos padronizado. O .docx usa a fonte Bahnschrift (instalada no Windows), com Arial como reserva; o PDF leva embutida a fonte livre Barlow (SIL Open Font License), de desenho semelhante ao DIN.
 
 ## Privacidade
 Tudo roda no navegador. Nenhum dado ou foto é enviado a servidores: o rascunho, o fiscal e os assinantes ficam guardados apenas no navegador de quem usa. É necessário estar conectado à internet para carregar as bibliotecas de geração do .docx e do PDF.
