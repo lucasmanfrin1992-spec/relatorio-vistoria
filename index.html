@@ -536,6 +536,8 @@ function addFiles(list){var files=[].slice.call(list).filter(function(f){return 
 }
 $("fileIn").addEventListener("change",function(){addFiles(this.files);this.value=""});
 $("camIn").addEventListener("change",function(){addFiles(this.files);this.value=""});
+/* fotos escolhidas enquanto o app ainda carregava */
+setTimeout(function(){["fileIn","camIn"].forEach(function(id){var el=$(id);if(el.files&&el.files.length){addFiles(el.files);el.value=""}})},0);
 var drop=$("drop");
 ["dragenter","dragover"].forEach(function(t){drop.addEventListener(t,function(e){if(dragId)return;e.preventDefault();drop.classList.add("over")})});
 ["dragleave","drop"].forEach(function(t){drop.addEventListener(t,function(){drop.classList.remove("over")})});
@@ -877,7 +879,8 @@ if("serviceWorker" in navigator&&(location.protocol==="https:"||location.hostnam
     if(reg.waiting&&navigator.serviceWorker.controller)ask(reg.waiting);
     reg.addEventListener("updatefound",function(){var w=reg.installing;w&&w.addEventListener("statechange",function(){if(w.state==="installed"&&navigator.serviceWorker.controller)ask(w)})});
   }).catch(function(){});
-  var reloading=false;navigator.serviceWorker.addEventListener("controllerchange",function(){if(reloading)return;reloading=true;location.reload()});
+  /* recarrega só quando uma versão nova substitui a anterior; na primeira visita o service worker apenas assume a página */
+  var hadController=!!navigator.serviceWorker.controller,reloading=false;navigator.serviceWorker.addEventListener("controllerchange",function(){if(!hadController){hadController=true;return}if(reloading)return;reloading=true;location.reload()});
 }
 /* barra do celular e prévia em tela cheia */
 $("mPrev").onclick=function(){document.body.classList.add("pv-open");renderPreview()};
@@ -891,7 +894,7 @@ $("segDisc").addEventListener("click",function(e){var b=e.target.closest("button
   if(S.objKind!=="livre"){if(was)applyObj();else $("btnObj").textContent="Substituir pelo texto do modelo"}
   if(!nameTouched)autoName();if(S.disc==="out")$("fDiscOut").focus();changed()});
 /* ---------- atualizar o app ---------- */
-var APP_VERSION="2026-11-25h";
+var APP_VERSION="2026-11-25i";
 function checkUpdate(){var b=$("btnUpd");
   if(!("serviceWorker" in navigator)||!navigator.serviceWorker.controller){toast("Recarregando a página…");setTimeout(function(){location.reload()},400);return}
   b.disabled=true;toast("Procurando atualização…");
@@ -906,7 +909,7 @@ $("btnUpd").onclick=checkUpdate;$("verTxt").textContent=APP_VERSION;
 /* ---------- init ---------- */
 function init(draft){
   try{var sg=JSON.parse(localStorage.getItem("rv_sigs")||"null");if(Array.isArray(sg)&&sg.length)S.sigs=sg}catch(e){}
-  if(draft){S.reg=draft.reg||S.reg;S.com=draft.com||"";S.ed=draft.ed||"0";S.size=draft.size||"L";S.objKind=draft.objKind||"acomp";S.disc=draft.disc||"civ";S.cEnd=draft.cEnd!==false;S.cSit=!!draft.cSit;nameTouched=!!draft.nameTouched;dataRelTouched=!!draft.dataRelTouched;lastObjAuto=draft.lastObjAuto||"";S.photos=(draft.photos||[]).filter(function(p){return p&&p.blob})}
+  if(draft){S.reg=draft.reg||S.reg;S.com=draft.com||"";S.ed=draft.ed||"0";S.size=draft.size||"L";S.objKind=draft.objKind||"acomp";S.disc=draft.disc||"civ";S.cEnd=draft.cEnd!==false;S.cSit=!!draft.cSit;nameTouched=!!draft.nameTouched;dataRelTouched=!!draft.dataRelTouched;lastObjAuto=draft.lastObjAuto||"";S.photos=(draft.photos||[]).filter(function(p){return p&&p.blob}).concat(S.photos)} /* mantém fotos adicionadas antes de o rascunho terminar de carregar */
   fillReg();fillCom();fillEd();renderCard();
   $("selObj").value=S.objKind;syncTpl();syncDisc();$("cEnd").checked=S.cEnd;$("cSit").checked=S.cSit;syncSeg();
   if(draft&&draft.f){F.forEach(function(k){if(draft.f[k]!=null)$(k).value=draft.f[k]});if(draft.f.fUn2==null)unitDefaults();else migrateUnit()}
