@@ -11,11 +11,11 @@ O gerador é um PWA: pode ser instalado e funciona sem internet depois da primei
 - **iPhone/iPad (Safari):** **Compartilhar › Adicionar à Tela de Início**.
 - **Mac (Safari):** **Arquivo › Adicionar ao Dock**.
 
-O app instalado usa o símbolo do TJPR como ícone, abre em janela própria e avisa quando há uma nova versão.
+O app instalado usa o símbolo do TJPR como ícone, abre em janela própria e avisa quando há uma nova versão. O botão **Atualizar app**, no topo, procura e instala a versão mais recente na hora; a versão em uso aparece no rodapé.
 
 ## Como usar
 1. Escolha regional, comarca e edificação (base de imóveis do TJPR).
-2. Confira a identificação e informe o protocolo SEI, a data e o fiscal.
+2. Escolha a disciplina (Civil, Elétrica, Mecânica ou outra), confira a identificação e informe o protocolo SEI, a data e o fiscal. A disciplina entra na Identificação do relatório, no nome do arquivo e ajusta os textos-modelo do Objetivo.
 3. Escolha o modelo de objetivo e descreva a vistoria.
 4. Inclua as fotos com legenda (arraste para reordenar).
 5. Informe os assinantes e clique em **Gerar relatório .docx** (para editar no Word) ou **Gerar PDF** (pronto para anexar no SEI).
@@ -29,4 +29,4 @@ Segue o Manual de Uso da marca TJPR: cabeçalho com a marca horizontal e o texto
 Tudo roda no navegador. Nenhum dado ou foto é enviado a servidores: o rascunho, o fiscal e os assinantes ficam guardados apenas no navegador de quem usa. É necessário estar conectado à internet para carregar as bibliotecas de geração do .docx e do PDF.
 
 ## Atualização
-O app é o arquivo `index.html`, com `manifest.webmanifest`, `sw.js` (funcionamento offline) e a pasta `icons/`. Ao publicar uma versão nova, altere `VERSION` em `sw.js` para que os apps instalados ofereçam a atualização. Para atualizar, substitua o arquivo e faça commit na branch `main`; o GitHub Pages publica em cerca de 1 minuto.
+O app é o arquivo `index.html`, com `manifest.webmanifest`, `sw.js` (funcionamento offline) e a pasta `icons/`. Ao publicar uma versão nova, altere `VERSION` em `sw.js` e `APP_VERSION` no `index.html` para que os apps instalados ofereçam a atualização. Para atualizar, substitua o arquivo e faça commit na branch `main`; o GitHub Pages publica em cerca de 1 minuto.
