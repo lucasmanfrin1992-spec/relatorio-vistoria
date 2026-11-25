@@ -314,8 +314,7 @@ input:focus-visible,select:focus-visible,textarea:focus-visible,button:focus-vis
       <label class="f">Fiscal<input type="text" id="fFiscal" placeholder="ex.: Eng. Nome Sobrenome"></label>
       <label class="f">Contrato / Ata <span class="opt">(opcional)</span><input type="text" id="fContrato" placeholder="ex.: Contrato nº 000/2026"></label>
       <label class="f">Contratada <span class="opt">(opcional)</span><input type="text" id="fEmpresa"></label>
-      <label class="f">Cabeçalho · linha 1 <span class="opt">(unidade)</span><input type="text" id="fUn1" maxlength="70"></label>
-      <label class="f">Cabeçalho · linha 2 <span class="opt">(também vai abaixo do título)</span><input type="text" id="fUn2" maxlength="70"></label>
+      <label class="f full">Unidade <span class="opt">(sai no cabeçalho e abaixo do título)</span><input type="text" id="fUn2" maxlength="70"></label>
     </div>
     <div class="row">
       <label class="chk"><input type="checkbox" id="cEnd" checked> Incluir endereço no relatório</label>
@@ -432,13 +431,13 @@ var OBJ=OBJ_CIV;
 var DEF_SIGS=[{l1:"",l2:"",on:true}];
 
 var $=function(id){return document.getElementById(id)};
-var F=["fUn1","fUn2","fDiscOut","fObra","fComReg","fSei","fEnd","fData","fData2","fFiscal","fContrato","fEmpresa","fObj","fRel","fLocal","fDataRel","fName"];
+var F=["fUn2","fDiscOut","fObra","fComReg","fSei","fEnd","fData","fData2","fFiscal","fContrato","fEmpresa","fObj","fRel","fLocal","fDataRel","fName"];
 var S={reg:"02",com:"",ed:"0",size:"L",objKind:"acomp",disc:"civ",cEnd:true,cSit:false,photos:[],sigs:JSON.parse(JSON.stringify(DEF_SIGS)),f:{}};
 var nameTouched=false, dataRelTouched=false;
 
-var UN_DEF=["Departamento de Engenharia e Arquitetura","Divisão de Obras de Reforma e Conservação de Edifícios - DOR"];
+var UN_DEF=["","Divisão de Obras de Reforma e Conservação de Edifícios - DOR"];
 var UN_OLD=["Divisão de Engenharia"]; /* textos antigos salvos são trocados pelo nome atual */
-function unitDefaults(){$("fUn1").value=lsGet("rv_un1")||UN_DEF[0];$("fUn2").value=lsGet("rv_un2_set")?lsGet("rv_un2"):UN_DEF[1];migrateUnit()}
+function unitDefaults(){$("fUn2").value=lsGet("rv_un2_set")?lsGet("rv_un2"):UN_DEF[1];migrateUnit()}
 function migrateUnit(){if(UN_OLD.indexOf($("fUn2").value.trim())>=0){$("fUn2").value=UN_DEF[1];try{if(lsGet("rv_un2_set"))localStorage.setItem("rv_un2",UN_DEF[1])}catch(e){}}}
 function lsGet(k){try{return localStorage.getItem(k)||""}catch(e){return ""}}
 function pad(n){return String(n).padStart(2,"0")}
@@ -596,7 +595,7 @@ function renderPreview(){var sh=$("sheet");var k=(sh.clientWidth||430)/210;sh.st
 var C_NAVY="002A3A",C_TEAL="008C95",C_HL="EEB134",C_INK="222222",C_SEC="526A74",C_LINE="B7C1C6",C_IDL="D0D6D9",C_PHBG="E7EAEC";
 var BW=9128; /* largura útil 16,1 cm em twips */
 function subTitle(){return $("fUn2").value.trim()}
-function unitLines(){var a=[$("fUn1").value.trim(),$("fUn2").value.trim()].filter(Boolean);return a}
+function unitLines(){var a=[$("fUn2").value.trim()].filter(Boolean);return a}
 /* propriedades de texto: semi=Bahnschrift SemiBold; sz em pt */
 function RP(o){o=o||{};var f=o.semi?"Bahnschrift SemiBold":"Bahnschrift";
   return '<w:rPr><w:rFonts w:ascii="'+f+'" w:eastAsia="'+f+'" w:hAnsi="'+f+'" w:cs="Arial"/>'+(o.caps?'<w:caps/>':'')+'<w:color w:val="'+(o.color||C_INK)+'"/>'+(o.sp?'<w:spacing w:val="'+o.sp+'"/>':'')+'<w:sz w:val="'+Math.round((o.sz||11)*2)+'"/><w:szCs w:val="'+Math.round((o.sz||11)*2)+'"/>'+(o.hl?'<w:shd w:val="clear" w:color="auto" w:fill="'+C_HL+'"/>':'')+'</w:rPr>'}
@@ -827,7 +826,7 @@ $("selObj").onchange=function(){S.objKind=this.value;if(isObjAuto()&&S.objKind!=
 $("btnObj").onclick=function(){this.textContent="Restaurar texto do modelo";if(S.objKind==="livre"){$("fObj").value="";lastObjAuto=""}else applyObj();changed()};
 $("cEnd").onchange=function(){S.cEnd=this.checked;changed()};
 $("cSit").onchange=function(){S.cSit=this.checked;changed()};
-F.forEach(function(k){$(k).addEventListener("input",function(){if(k==="fName")nameTouched=true;if(k==="fFiscal"){try{localStorage.setItem("rv_fiscal",$("fFiscal").value)}catch(e){}}if(k==="fUn1"||k==="fUn2"){try{localStorage.setItem("rv_un1",$("fUn1").value);localStorage.setItem("rv_un2",$("fUn2").value);localStorage.setItem("rv_un2_set","1")}catch(e){}}if(k==="fDataRel")dataRelTouched=true;
+F.forEach(function(k){$(k).addEventListener("input",function(){if(k==="fName")nameTouched=true;if(k==="fFiscal"){try{localStorage.setItem("rv_fiscal",$("fFiscal").value)}catch(e){}}if(k==="fUn2"){try{localStorage.setItem("rv_un2",$("fUn2").value);localStorage.setItem("rv_un2_set","1")}catch(e){}}if(k==="fDataRel")dataRelTouched=true;
   if(k==="fData"&&!dataRelTouched)$("fDataRel").value=$("fData").value;
   if((k==="fObra"||k==="fData"||k==="fDiscOut")&&!nameTouched)autoName();
   if(k==="fObra"&&S.objKind!=="livre"&&isObjAuto())applyObj();
@@ -892,7 +891,7 @@ $("segDisc").addEventListener("click",function(e){var b=e.target.closest("button
   if(S.objKind!=="livre"){if(was)applyObj();else $("btnObj").textContent="Substituir pelo texto do modelo"}
   if(!nameTouched)autoName();if(S.disc==="out")$("fDiscOut").focus();changed()});
 /* ---------- atualizar o app ---------- */
-var APP_VERSION="2026-11-25g";
+var APP_VERSION="2026-11-25h";
 function checkUpdate(){var b=$("btnUpd");
   if(!("serviceWorker" in navigator)||!navigator.serviceWorker.controller){toast("Recarregando a página…");setTimeout(function(){location.reload()},400);return}
   b.disabled=true;toast("Procurando atualização…");
@@ -910,7 +909,7 @@ function init(draft){
   if(draft){S.reg=draft.reg||S.reg;S.com=draft.com||"";S.ed=draft.ed||"0";S.size=draft.size||"L";S.objKind=draft.objKind||"acomp";S.disc=draft.disc||"civ";S.cEnd=draft.cEnd!==false;S.cSit=!!draft.cSit;nameTouched=!!draft.nameTouched;dataRelTouched=!!draft.dataRelTouched;lastObjAuto=draft.lastObjAuto||"";S.photos=(draft.photos||[]).filter(function(p){return p&&p.blob})}
   fillReg();fillCom();fillEd();renderCard();
   $("selObj").value=S.objKind;syncTpl();syncDisc();$("cEnd").checked=S.cEnd;$("cSit").checked=S.cSit;syncSeg();
-  if(draft&&draft.f){F.forEach(function(k){if(draft.f[k]!=null)$(k).value=draft.f[k]});if(draft.f.fUn1==null)unitDefaults();else migrateUnit()}
+  if(draft&&draft.f){F.forEach(function(k){if(draft.f[k]!=null)$(k).value=draft.f[k]});if(draft.f.fUn2==null)unitDefaults();else migrateUnit()}
   else{$("fFiscal").value=lsGet("rv_fiscal");unitDefaults();$("fData").value=todayISO();$("fDataRel").value=todayISO();$("fLocal").value="Curitiba";applyLocation()}
   renderSigs();renderPhotos();renderPreview();renderIssues();
 }
