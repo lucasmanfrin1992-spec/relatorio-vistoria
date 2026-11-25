@@ -4,6 +4,15 @@ Ferramenta web para gerar o **Relatório de Vistoria (.docx ou PDF)** no modelo 
 
 **Acesse:** https://lucasmanfrin1992-spec.github.io/relatorio-vistoria/
 
+## Instalar como aplicativo
+O gerador é um PWA: pode ser instalado e funciona sem internet depois da primeira abertura.
+- **Computador (Chrome ou Edge):** clique em **Instalar app** no topo da página ou no ícone de instalar da barra de endereço.
+- **Android (Chrome):** toque em **Instalar app** ou no menu **⋮ › Instalar app / Adicionar à tela inicial**.
+- **iPhone/iPad (Safari):** **Compartilhar › Adicionar à Tela de Início**.
+- **Mac (Safari):** **Arquivo › Adicionar ao Dock**.
+
+O app instalado usa o símbolo do TJPR como ícone, abre em janela própria e avisa quando há uma nova versão.
+
 ## Como usar
 1. Escolha regional, comarca e edificação (base de imóveis do TJPR).
 2. Confira a identificação e informe o protocolo SEI, a data e o fiscal.
@@ -20,4 +29,4 @@ Segue o Manual de Uso da marca TJPR: cabeçalho com a marca horizontal e o texto
 Tudo roda no navegador. Nenhum dado ou foto é enviado a servidores: o rascunho, o fiscal e os assinantes ficam guardados apenas no navegador de quem usa. É necessário estar conectado à internet para carregar as bibliotecas de geração do .docx e do PDF.
 
 ## Atualização
-O app é um único arquivo (`index.html`). Para atualizar, substitua o arquivo e faça commit na branch `main`; o GitHub Pages publica em cerca de 1 minuto.
+O app é o arquivo `index.html`, com `manifest.webmanifest`, `sw.js` (funcionamento offline) e a pasta `icons/`. Ao publicar uma versão nova, altere `VERSION` em `sw.js` para que os apps instalados ofereçam a atualização. Para atualizar, substitua o arquivo e faça commit na branch `main`; o GitHub Pages publica em cerca de 1 minuto.
