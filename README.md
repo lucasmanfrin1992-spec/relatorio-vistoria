@@ -1,6 +1,6 @@
 # Gerador de Relatório de Vistoria – DOR/TJPR
 
-Ferramenta web para gerar o **Relatório de Vistoria (.docx ou PDF)** no modelo da Divisão de Obras de Reformas e Conservação de Edifícios (SG-SI-CED-DOR) do TJPR.
+Ferramenta web para gerar o **Relatório de Vistoria (.docx ou PDF)** no modelo da Divisão de Obras de Reforma e Conservação de Edifícios - DOR (SG-SI-CED-DOR) do TJPR.
 
 **Acesse:** https://lucasmanfrin1992-spec.github.io/relatorio-vistoria/
 

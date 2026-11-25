@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Relatório de Vistoria · DOR</title>
-<meta name="description" content="Gerador de Relatório de Vistoria (.docx) no modelo da Divisão de Obras de Reformas e Conservação de Edifícios – TJPR">
+<meta name="description" content="Gerador de Relatório de Vistoria (.docx) no modelo da Divisão de Obras de Reforma e Conservação de Edifícios - DOR – TJPR">
 <link rel="manifest" href="manifest.webmanifest">
 <meta name="theme-color" content="#0f4a64" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#0b2f40" media="(prefers-color-scheme: dark)">
@@ -252,7 +252,7 @@ input:focus-visible,select:focus-visible,textarea:focus-visible,button:focus-vis
 <header class="band">
   <div class="band-in">
     <div>
-      <span class="unit">SG-SI-CED-DOR<span class="unit-l"> · Divisão de Obras de Reformas e Conservação de Edifícios</span> · TJPR</span>
+      <span class="unit">SG-SI-CED-DOR<span class="unit-l"> · Divisão de Obras de Reforma e Conservação de Edifícios - DOR</span> · TJPR</span>
       <h1>Relatório de Vistoria</h1>
       <p>Escolha o local, descreva a vistoria, inclua as fotos com legenda e gere o .docx ou o PDF no modelo da Divisão.</p>
     </div>
@@ -401,8 +401,10 @@ var F=["fUn1","fUn2","fObra","fComReg","fSei","fEnd","fData","fData2","fFiscal",
 var S={reg:"02",com:"",ed:"0",size:"L",objKind:"acomp",cEnd:true,cSit:false,photos:[],sigs:JSON.parse(JSON.stringify(DEF_SIGS)),f:{}};
 var nameTouched=false, dataRelTouched=false;
 
-var UN_DEF=["Departamento de Engenharia e Arquitetura","Divisão de Engenharia"];
-function unitDefaults(){$("fUn1").value=lsGet("rv_un1")||UN_DEF[0];$("fUn2").value=lsGet("rv_un2_set")?lsGet("rv_un2"):UN_DEF[1]}
+var UN_DEF=["Departamento de Engenharia e Arquitetura","Divisão de Obras de Reforma e Conservação de Edifícios - DOR"];
+var UN_OLD=["Divisão de Engenharia"]; /* textos antigos salvos são trocados pelo nome atual */
+function unitDefaults(){$("fUn1").value=lsGet("rv_un1")||UN_DEF[0];$("fUn2").value=lsGet("rv_un2_set")?lsGet("rv_un2"):UN_DEF[1];migrateUnit()}
+function migrateUnit(){if(UN_OLD.indexOf($("fUn2").value.trim())>=0){$("fUn2").value=UN_DEF[1];try{if(lsGet("rv_un2_set"))localStorage.setItem("rv_un2",UN_DEF[1])}catch(e){}}}
 function lsGet(k){try{return localStorage.getItem(k)||""}catch(e){return ""}}
 function pad(n){return String(n).padStart(2,"0")}
 function todayISO(){var d=new Date();return d.getFullYear()+"-"+pad(d.getMonth()+1)+"-"+pad(d.getDate())}
@@ -849,7 +851,7 @@ function init(draft){
   if(draft){S.reg=draft.reg||S.reg;S.com=draft.com||"";S.ed=draft.ed||"0";S.size=draft.size||"L";S.objKind=draft.objKind||"acomp";S.cEnd=draft.cEnd!==false;S.cSit=!!draft.cSit;nameTouched=!!draft.nameTouched;dataRelTouched=!!draft.dataRelTouched;lastObjAuto=draft.lastObjAuto||"";S.photos=(draft.photos||[]).filter(function(p){return p&&p.blob})}
   fillReg();fillCom();fillEd();renderCard();
   $("selObj").value=S.objKind;syncTpl();$("cEnd").checked=S.cEnd;$("cSit").checked=S.cSit;syncSeg();
-  if(draft&&draft.f){F.forEach(function(k){if(draft.f[k]!=null)$(k).value=draft.f[k]});if(draft.f.fUn1==null)unitDefaults()}
+  if(draft&&draft.f){F.forEach(function(k){if(draft.f[k]!=null)$(k).value=draft.f[k]});if(draft.f.fUn1==null)unitDefaults();else migrateUnit()}
   else{$("fFiscal").value=lsGet("rv_fiscal");unitDefaults();$("fData").value=todayISO();$("fDataRel").value=todayISO();$("fLocal").value="Curitiba";applyLocation()}
   renderSigs();renderPhotos();renderPreview();renderIssues();
 }

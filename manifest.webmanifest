@@ -2,7 +2,7 @@
   "id": "./",
   "name": "Relatório de Vistoria – DOR/TJPR",
   "short_name": "Vistoria TJPR",
-  "description": "Gera o Relatório de Vistoria (.docx e PDF) no modelo da Divisão de Obras de Reformas e Conservação de Edifícios do TJPR, com fotos e legendas.",
+  "description": "Gera o Relatório de Vistoria (.docx e PDF) no modelo da Divisão de Obras de Reforma e Conservação de Edifícios - DOR do TJPR, com fotos e legendas.",
   "lang": "pt-BR",
   "dir": "ltr",
   "start_url": "./",
