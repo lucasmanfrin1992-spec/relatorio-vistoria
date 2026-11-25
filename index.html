@@ -214,6 +214,67 @@ input:focus-visible,select:focus-visible,textarea:focus-visible,button:focus-vis
 .segd button{justify-content:center;min-height:46px;font-size:15px}
 .segd svg{width:18px;height:18px}
 @media (max-width:760px){.segd{grid-template-columns:repeat(2,minmax(0,1fr))!important}.segd button{border-bottom:1px solid var(--line);justify-content:center!important}.segd button:nth-child(2n){border-right:0}.segd button:nth-child(odd){border-right:1px solid var(--line)}.segd button:nth-last-child(-n+2){border-bottom:0}#btnUpd{min-height:36px;padding:5px 11px;font-size:13.5px}}
+
+/* fotos: data, marcação */
+.ph .dt{position:absolute;left:8px;bottom:8px;background:rgba(10,30,40,.72);color:#fff;font:500 12px var(--f-mono);border-radius:6px;padding:2px 7px;max-width:calc(100% - 16px);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ph .dt.off{background:var(--warn);color:#fff;font-weight:600}
+.ph .edt{position:absolute;right:8px;bottom:8px;background:#e11d2e;color:#fff;font:700 12px var(--f-body);border-radius:6px;padding:2px 8px}
+.ph .tools .btn[data-act=up],.ph .tools .btn[data-act=down]{flex:0 0 40px}
+.ph .tools .btn svg{width:15px;height:15px}
+.ph .im{overflow:hidden}.ph .im img{position:absolute;inset:0}
+.qhint{font-size:13.5px;color:var(--muted);flex-basis:100%}
+.hint{font-size:14px;color:var(--muted);margin:0}
+/* pendências */
+.pend{display:flex;flex-direction:column;gap:10px;border-top:1px dashed var(--line);padding-top:12px}
+#pendBox{display:flex;flex-direction:column;gap:10px}
+.prows{display:flex;flex-direction:column;gap:10px}
+.prow{border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:8px;background:var(--surface-2);padding:10px 12px;display:flex;flex-direction:column;gap:8px}
+.prow-h{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
+.prow-h b{font:700 15px var(--f-display);color:var(--accent)}
+.prow textarea.empty{border-color:var(--warn)}
+.sheet .pt{width:100%;border-collapse:collapse;margin:0 0 calc(var(--k)*3)}
+.sheet .pt th,.sheet .pt td{border:calc(var(--k)*.26) solid #b7c1c6;padding:calc(var(--k)*1.06) calc(var(--k)*1.5);font-size:calc(var(--k)*3.35);line-height:calc(var(--k)*4.23);vertical-align:top;text-align:left;overflow-wrap:anywhere}
+.sheet .pt th{background:#e7eaec;color:#002a3a;font-weight:600;font-size:calc(var(--k)*3.175);vertical-align:middle}
+.sheet .pt th:nth-child(1),.sheet .pt td.c{text-align:center;width:calc(var(--k)*10)}
+.sheet .pt th:nth-child(2){width:calc(var(--k)*32)}.sheet .pt th:nth-child(3){width:calc(var(--k)*60)}.sheet .pt th:nth-child(4){width:calc(var(--k)*43)}.sheet .pt th:nth-child(5){width:calc(var(--k)*16);text-align:center}
+/* meus relatórios */
+.rpanel{position:fixed;inset:0;z-index:48;background:rgba(5,20,28,.55);display:flex;justify-content:flex-end}
+.rpanel-c{background:var(--surface);color:var(--ink);width:min(560px,100%);height:100%;display:flex;flex-direction:column;gap:12px;padding:calc(16px + env(safe-area-inset-top)) 18px calc(16px + env(safe-area-inset-bottom));box-shadow:-10px 0 40px rgba(0,0,0,.25)}
+.rp-h{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.rp-h h3{font:700 22px/1.2 var(--f-display);margin:0}
+.rp-sub{font-size:13.5px;color:var(--muted)}
+.rp-tools{display:flex;gap:8px;flex-wrap:wrap}
+.rp-tools input[type=search]{flex:1 1 220px;font-size:16px;color:var(--ink);background:var(--surface-2);border:1px solid var(--line);border-radius:8px;padding:9px 12px;min-height:42px}
+.rp-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px;overflow-y:auto;flex:1}
+.rep{border:1px solid var(--line);border-radius:10px;padding:12px;display:flex;flex-direction:column;gap:6px;background:var(--surface-2)}
+.rep.cur{border-color:var(--accent);box-shadow:inset 3px 0 0 var(--accent)}
+.rep-t{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.rep-t b{font:700 16px/1.25 var(--f-display)}
+.rep-m{font-size:13.5px;color:var(--muted)}
+.rep-a{display:flex;gap:6px;flex-wrap:wrap;margin-top:2px}
+.rep-empty{color:var(--muted);text-align:center;padding:20px}
+.rp-note{font-size:13px;color:var(--muted);margin:0}
+body.rp-open,body.ed-open{overflow:hidden}
+/* editor de fotos */
+.editor{position:fixed;inset:0;z-index:60;background:#0b1418;color:#e8f0f3;display:flex;flex-direction:column}
+.ed-top{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:calc(10px + env(safe-area-inset-top)) 14px 10px;border-bottom:1px solid #22323a}
+.ed-top b{font:700 17px var(--f-display)}
+.ed-bar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;padding:8px 12px;border-bottom:1px solid #22323a;background:#101c22}
+.ed-grp{display:flex;gap:4px;flex-wrap:wrap;align-items:center;padding-right:10px;border-right:1px solid #22323a}
+.ed-grp:last-child{border-right:0}
+.ed-grp button{display:inline-flex;flex-direction:column;align-items:center;gap:2px;min-width:52px;min-height:48px;padding:4px 6px;border-radius:8px;border:1px solid transparent;background:transparent;color:#cfe0e7;font:600 11.5px var(--f-body);cursor:pointer}
+.ed-grp button svg{width:20px;height:20px}
+.ed-grp button[aria-pressed=true]{background:#1c3a48;border-color:#5db3d8;color:#fff}
+.ed-grp button:disabled{opacity:.4}
+.ed-grp .sw{min-width:34px;min-height:34px;width:34px;height:34px;border-radius:50%;background:var(--c);border:2px solid #0b1418;box-shadow:0 0 0 1px #4a5c64}
+.ed-grp .sw[aria-pressed=true]{background:var(--c);border-color:#0b1418;box-shadow:0 0 0 3px #5db3d8}
+.ed-tip{font-size:14px;color:#cfe0e7;flex:1 1 220px}
+.ed-stage{flex:1;position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden;padding:8px}
+.ed-stage canvas{touch-action:none;box-shadow:0 4px 30px rgba(0,0,0,.5);cursor:crosshair;max-width:100%;max-height:100%}
+.ed-text{position:absolute;width:200px;font-size:16px;padding:8px 10px;border-radius:8px;border:2px solid #5db3d8;background:#fff;color:#111;z-index:2}
+.editor .btn{border-color:#35505c;background:#15252c;color:#e8f0f3}
+.editor .btn.primary{background:#5db3d8;border-color:#5db3d8;color:#05202c}
+@media (max-width:760px){.ed-grp{border-right:0;padding-right:0}.ed-grp button{min-width:46px}.ed-grp button span{font-size:10.5px}.rpanel-c{width:100%}}
 /* PWA + celular */
 .net{font-size:13px;color:#ffd58a;display:inline-flex;align-items:center;gap:6px}
 .cam{display:none;align-self:flex-start}
@@ -238,7 +299,7 @@ input:focus-visible,select:focus-visible,textarea:focus-visible,button:focus-vis
   .band-in{align-items:center}
   .layout{gap:14px;margin-top:14px}
   body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
-  .mbar{display:grid;grid-template-columns:1fr 1fr 1.4fr;gap:8px;position:fixed;left:0;right:0;bottom:0;z-index:30;background:var(--surface);border-top:1px solid var(--line);padding:8px max(10px,env(safe-area-inset-left)) calc(8px + env(safe-area-inset-bottom)) max(10px,env(safe-area-inset-right));box-shadow:0 -6px 18px rgba(0,0,0,.08)}
+  .mbar{display:grid;grid-template-columns:1fr 1fr 1fr 1.3fr;gap:8px;position:fixed;left:0;right:0;bottom:0;z-index:30;background:var(--surface);border-top:1px solid var(--line);padding:8px max(10px,env(safe-area-inset-left)) calc(8px + env(safe-area-inset-bottom)) max(10px,env(safe-area-inset-right));box-shadow:0 -6px 18px rgba(0,0,0,.08)}
   .mb{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;min-height:54px;border:1px solid var(--line);border-radius:10px;background:var(--surface-2);color:var(--ink);font:600 13.5px var(--f-body);cursor:pointer}
   .mb svg{width:20px;height:20px}
   .mb.pri{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
@@ -265,10 +326,11 @@ input:focus-visible,select:focus-visible,textarea:focus-visible,button:focus-vis
       <p>Escolha o local, descreva a vistoria, inclua as fotos com legenda e gere o .docx ou o PDF no modelo da Divisão.</p>
     </div>
     <div class="actions">
-      <span class="save-state" id="saveState">Rascunho salvo neste navegador</span>
+      <span class="save-state" id="saveState">Salvo neste aparelho</span>
       <span class="net" id="netState" hidden>Offline · o app continua funcionando</span>
       <button class="btn" id="btnInstall" type="button" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v11M7.5 9.5 12 14l4.5-4.5"/><rect x="4" y="17" width="16" height="4" rx="1"/></svg>Instalar app</button>
       <button class="btn" id="btnUpd" type="button" title="Procurar e instalar a versão mais recente do app"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-2.6-6.4"/><path d="M21 3v6h-6"/></svg>Atualizar app</button>
+      <button class="btn" id="btnReps" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>Meus relatórios</button>
       <span id="newWrap"><button class="btn ghost" id="btnNew" type="button">Novo relatório</button></span>
       <button class="btn" id="btnPdfTop" type="button">Gerar PDF</button>
       <button class="btn primary" id="btnGenTop" type="button">Gerar .docx</button>
@@ -340,6 +402,14 @@ input:focus-visible,select:focus-visible,textarea:focus-visible,button:focus-vis
     <div class="step-h"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h4L19 9l-4-4L4 16z"/><path d="M14 6l4 4"/></svg></span><h2 id="s4">Relatório</h2><span class="state" data-st="4"></span><span class="sub">Descreva a vistoria. Deixe uma linha em branco entre parágrafos.</span></div>
     <textarea id="fRel" rows="12" aria-label="Texto do relatório" placeholder="Foi realizada vistoria técnica nas dependências do fórum, com a finalidade de…&#10;&#10;Durante a inspeção, verificou-se…"></textarea>
     <span class="count" id="cntRel"></span>
+    <div class="pend">
+      <div class="row" style="justify-content:space-between"><label class="chk"><input type="checkbox" id="cPend"> Incluir quadro de pendências / não conformidades</label><span class="count" id="pendCount" style="margin:0"></span></div>
+      <div id="pendBox" hidden>
+        <p class="hint">Entra no relatório como a seção <b>4. PENDÊNCIAS</b>, antes das fotos (que passam a ser a seção 5).</p>
+        <div id="pendRows" class="prows"></div>
+        <div><button class="btn small" id="btnPendAdd" type="button">+ Adicionar pendência</button></div>
+      </div>
+    </div>
   </section>
 
   <section class="step" id="st5" aria-labelledby="s5">
@@ -352,10 +422,20 @@ input:focus-visible,select:focus-visible,textarea:focus-visible,button:focus-vis
         <button type="button" data-v="S" aria-pressed="false"><svg viewBox="0 0 18 14"><rect x="1" y="1" width="7" height="5" rx="1" fill="currentColor" opacity=".85"/><rect x="10" y="1" width="7" height="5" rx="1" fill="currentColor" opacity=".85"/><rect x="1" y="8" width="7" height="5" rx="1" fill="currentColor" opacity=".85"/><rect x="10" y="8" width="7" height="5" rx="1" fill="currentColor" opacity=".85"/></svg>Pequeno · 2 colunas</button>
       </div>
     </div>
+    <div class="row">
+      <span style="font-size:14px;color:var(--muted)">Peso das fotos no arquivo</span>
+      <div class="seg" id="segQ" role="group" aria-label="Peso das fotos no arquivo">
+        <button type="button" data-v="leve" aria-pressed="false">Leve</button>
+        <button type="button" data-v="eq" aria-pressed="true">Equilibrado</button>
+        <button type="button" data-v="alta" aria-pressed="false">Alta qualidade</button>
+      </div>
+      <span class="qhint" id="qHint"></span>
+    </div>
     <label class="drop" id="drop" for="fileIn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="8.5" cy="10" r="1.6"/><path d="M21 16l-5-5-8 8"/></svg><b>Escolher fotos</b><span>ou arraste aqui · JPG ou PNG, várias de uma vez</span></label>
     <input type="file" id="fileIn" accept="image/jpeg,image/png,image/webp" multiple hidden>
     <label class="btn cam" for="camIn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg>Tirar foto com a câmera</label>
     <input type="file" id="camIn" accept="image/*" capture="environment" hidden>
+    <div class="row" id="phSortRow" hidden><button class="btn small" id="btnSortDt" type="button">Ordenar pela data da foto</button><label class="chk"><input type="checkbox" id="cCapDate"> Mostrar a data da foto na legenda</label></div>
     <div class="photos" id="photos"></div>
   </section>
 
@@ -382,13 +462,47 @@ input:focus-visible,select:focus-visible,textarea:focus-visible,button:focus-vis
   <div class="sheet-wrap"><div class="sheet" id="sheet"></div></div>
 </aside>
 </main>
-<p class="foot">Campos obrigatórios vazios saem no documento como <b>[INDICAR …]</b> com fundo âmbar, para não passarem despercebidos. As fotos são reduzidas para 1600 px no lado maior. O .docx usa a fonte Bahnschrift (padrão do Windows); o PDF leva embutida uma fonte livre de estilo DIN. Nada é enviado a servidores: o rascunho, as fotos e os assinantes ficam guardados só neste navegador. Versão <span id="verTxt"></span>.</p>
+<p class="foot">Campos obrigatórios vazios saem no documento como <b>[INDICAR …]</b> com fundo âmbar, para não passarem despercebidos. As fotos são reduzidas para 1600 px no lado maior. O .docx usa a fonte Bahnschrift (padrão do Windows); o PDF leva embutida uma fonte livre de estilo DIN. Nada é enviado a servidores: os relatórios, as fotos e os assinantes ficam guardados só neste aparelho. Use “Exportar backup” em Meus relatórios para guardar uma cópia. Versão <span id="verTxt"></span>.</p>
 
 <nav class="mbar" aria-label="Ações rápidas">
+  <button type="button" class="mb" id="mReps"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>Relatórios</button>
   <button type="button" class="mb" id="mPrev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>Prévia</button>
   <button type="button" class="mb" id="mPdf"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6"/></svg>PDF</button>
   <button type="button" class="mb pri" id="mDocx"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5"/><path d="M4 19h16"/></svg>Gerar .docx</button>
 </nav>
+<div class="rpanel" id="repPanel" hidden role="dialog" aria-modal="true" aria-labelledby="repTitle">
+  <div class="rpanel-c">
+    <div class="rp-h"><div><h3 id="repTitle">Meus relatórios</h3><span class="rp-sub" id="repCount"></span></div><button class="btn small" id="repClose" type="button">Fechar</button></div>
+    <div class="rp-tools"><input type="search" id="repSearch" placeholder="Buscar por obra, SEI ou disciplina" aria-label="Buscar relatórios"><button class="btn primary small" id="repNew" type="button">+ Novo relatório</button><button class="btn small" id="repImport" type="button">Importar backup</button><input type="file" id="impIn" accept=".zip,application/zip" hidden></div>
+    <ul class="rp-list" id="repList"></ul>
+    <p class="rp-note">Os relatórios ficam salvos só neste aparelho. Use <b>Exportar backup</b> para guardar uma cópia (.zip com texto e fotos) ou levar para outro computador ou celular, e <b>Importar backup</b> para abrir lá.</p>
+  </div>
+</div>
+<div class="editor" id="editor" hidden role="dialog" aria-modal="true" aria-labelledby="edTitle">
+  <div class="ed-top"><b id="edTitle">Marcar foto</b><div class="row"><button class="btn small" id="edCancel" type="button">Cancelar</button><button class="btn small primary" id="edSave" type="button">Salvar</button></div></div>
+  <div class="ed-bar" id="edDraw">
+    <div class="ed-grp" id="edTools" role="group" aria-label="Ferramenta">
+      <button type="button" data-tool="arrow" aria-label="Seta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 19 19 5M10 5h9v9"/></svg><span>Seta</span></button>
+      <button type="button" data-tool="ell" aria-label="Círculo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><ellipse cx="12" cy="12" rx="9" ry="7"/></svg><span>Círculo</span></button>
+      <button type="button" data-tool="rect" aria-label="Retângulo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3.5" y="5.5" width="17" height="13" rx="1"/></svg><span>Retângulo</span></button>
+      <button type="button" data-tool="pen" aria-label="Caneta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17c3-1 4-5 7-5s3 4 6 3 3-5 5-6"/></svg><span>Caneta</span></button>
+      <button type="button" data-tool="text" aria-label="Texto"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 6h14M12 6v13"/></svg><span>Texto</span></button>
+    </div>
+    <div class="ed-grp" id="edColors" role="group" aria-label="Cor">
+      <button type="button" data-c="#e11d2e" class="sw" style="--c:#e11d2e" aria-label="Vermelho"></button><button type="button" data-c="#ffd400" class="sw" style="--c:#ffd400" aria-label="Amarelo"></button><button type="button" data-c="#ffffff" class="sw" style="--c:#ffffff" aria-label="Branco"></button><button type="button" data-c="#1f6feb" class="sw" style="--c:#1f6feb" aria-label="Azul"></button>
+    </div>
+    <div class="ed-grp">
+      <button type="button" id="edUndo" aria-label="Desfazer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 14 4 9l5-5"/><path d="M4 9h10a6 6 0 0 1 0 12h-3"/></svg><span>Desfazer</span></button>
+      <button type="button" id="edRotL" aria-label="Girar para a esquerda"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 2.6-6.4"/><path d="M3 3v6h6"/></svg><span>Girar</span></button>
+      <button type="button" id="edRotR" aria-label="Girar para a direita"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-2.6-6.4"/><path d="M21 3v6h-6"/></svg><span>Girar</span></button>
+      <button type="button" id="edCrop" aria-label="Recortar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2v14a2 2 0 0 0 2 2h14"/><path d="M18 22V8a2 2 0 0 0-2-2H2"/></svg><span>Recortar</span></button>
+      <button type="button" id="edReset" aria-label="Voltar à original"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8 8l8 8M16 8l-8 8"/></svg><span>Original</span></button>
+    </div>
+  </div>
+  <div class="ed-bar" id="edCropBar" hidden><span class="ed-tip">Arraste sobre a foto para marcar a área que deve ficar.</span><div class="row"><button class="btn small" id="edCropCancel" type="button">Voltar</button><button class="btn small" id="edCropDel" type="button">Tirar recorte</button><button class="btn small primary" id="edCropOk" type="button">Aplicar recorte</button></div></div>
+  <div class="ed-stage" id="edStage"><canvas id="edCanvas" aria-label="Foto para marcar"></canvas><input type="text" id="edText" class="ed-text" maxlength="60" placeholder="Digite e tecle Enter" hidden></div>
+</div>
+
 <div class="modal" id="modal" hidden role="dialog" aria-modal="true" aria-labelledby="mTitle"><div class="modal-c"><h3 id="mTitle"></h3><div id="mBody"></div><div class="row" style="justify-content:flex-end"><button class="btn primary" id="mOk" type="button">Entendi</button></div></div></div>
 <div class="toast" id="toast" hidden><span id="toastTxt"></span><button class="btn small primary" id="toastBtn" type="button" hidden></button><button class="btn small ghost" id="toastX" type="button" aria-label="Fechar">✕</button></div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
@@ -432,7 +546,7 @@ var DEF_SIGS=[{l1:"",l2:"",on:true}];
 
 var $=function(id){return document.getElementById(id)};
 var F=["fUn2","fDiscOut","fObra","fComReg","fSei","fEnd","fData","fData2","fFiscal","fContrato","fEmpresa","fObj","fRel","fLocal","fDataRel","fName"];
-var S={reg:"02",com:"",ed:"0",size:"L",objKind:"acomp",disc:"civ",cEnd:true,cSit:false,photos:[],sigs:JSON.parse(JSON.stringify(DEF_SIGS)),f:{}};
+var S={reg:"02",com:"",ed:"0",size:"L",objKind:"acomp",disc:"civ",q:"eq",capDate:false,pend:{on:false,rows:[]},cEnd:true,cSit:false,photos:[],sigs:JSON.parse(JSON.stringify(DEF_SIGS)),f:{}};
 var nameTouched=false, dataRelTouched=false;
 
 var UN_DEF=["","Divisão de Obras de Reforma e Conservação de Edifícios - DOR"];
@@ -501,14 +615,16 @@ function saveSigs(){try{localStorage.setItem("rv_sigs",JSON.stringify(S.sigs))}c
 var urls={};
 function urlOf(p){if(!urls[p.id])urls[p.id]=URL.createObjectURL(p.blob);return urls[p.id]}
 function nn(i){return pad(i+1)}
-function renderPhotos(){var el=$("photos");
-  el.innerHTML=S.photos.map(function(p,i){var nc=!p.cap.trim();return '<div class="ph" draggable="true" data-id="'+p.id+'"><div class="im" title="Arraste para reordenar"><img src="'+urlOf(p)+'" alt="Foto '+nn(i)+'"><span class="num">Foto '+nn(i)+'</span>'+(nc?'<span class="flag">sem legenda</span>':'')+'</div><div class="meta"><textarea data-cap="'+p.id+'" class="'+(nc?"empty":"")+'" aria-label="Legenda da foto '+nn(i)+'" placeholder="O que a foto mostra (ex.: Corredor com pintura concluída, pendente instalação de interruptores)">'+h(p.cap)+'</textarea><div class="tools"><button class="btn small" type="button" data-act="up" '+(i===0?"disabled":"")+' aria-label="Mover para antes">← Antes</button><button class="btn small" type="button" data-act="down" '+(i===S.photos.length-1?"disabled":"")+' aria-label="Mover para depois">Depois →</button><button class="btn small ghost danger" type="button" data-act="del">Excluir</button></div></div></div>'}).join("")||'<div class="empty-ph">As fotos aparecem aqui, numeradas na ordem do relatório.</div>';
+function renderPhotos(){var el=$("photos"),chk=!!$("fData").value;
+  el.innerHTML=S.photos.map(function(p,i){var nc=!p.cap.trim(),off=chk&&p.dt&&!inPeriod(p.dt);return '<div class="ph" draggable="true" data-id="'+p.id+'"><div class="im" title="Arraste para reordenar"><img src="'+urlOf(p)+'" alt="Foto '+nn(i)+'" loading="lazy"><span class="num">Foto '+nn(i)+'</span>'+(nc?'<span class="flag">sem legenda</span>':'')+(p.edit?'<span class="edt">marcada</span>':'')+'<span class="dt'+(off?' off':'')+'" title="Data gravada pela câmera">'+(p.dt?(off?"outra data · ":"")+dtBR(p.dt):"sem data da câmera")+'</span></div><div class="meta"><textarea data-cap="'+p.id+'" class="'+(nc?"empty":"")+'" aria-label="Legenda da foto '+nn(i)+'" placeholder="O que a foto mostra (ex.: Corredor com pintura concluída, pendente instalação de interruptores)">'+h(p.cap)+'</textarea><div class="tools"><button class="btn small" type="button" data-act="up" '+(i===0?"disabled":"")+' aria-label="Mover para antes">←</button><button class="btn small" type="button" data-act="down" '+(i===S.photos.length-1?"disabled":"")+' aria-label="Mover para depois">→</button><button class="btn small" type="button" data-act="edit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h4L19 9l-4-4L4 16z"/></svg>Marcar</button><button class="btn small ghost danger" type="button" data-act="del">Excluir</button></div></div></div>'}).join("")||'<div class="empty-ph">As fotos aparecem aqui, numeradas na ordem do relatório.</div>';
   var nc=S.photos.filter(function(p){return !p.cap.trim()}).length;
   $("phCount").textContent=S.photos.length?S.photos.length+(S.photos.length>1?" fotos":" foto")+(nc?" · "+nc+" sem legenda":" · todas com legenda"):"nenhuma foto";
+  $("phSortRow").hidden=S.photos.length<2;syncQ();
 }
 $("photos").addEventListener("input",function(ev){var id=ev.target.dataset.cap;if(!id)return;var p=S.photos.find(function(x){return x.id===id});p.cap=ev.target.value;var em=!p.cap.trim();ev.target.classList.toggle("empty",em);var card=ev.target.closest(".ph"),fl=card.querySelector(".flag");if(em&&!fl){fl=document.createElement("span");fl.className="flag";fl.textContent="sem legenda";card.querySelector(".im").appendChild(fl)}else if(!em&&fl)fl.remove();var nc=S.photos.filter(function(x){return !x.cap.trim()}).length;$("phCount").textContent=S.photos.length+(S.photos.length>1?" fotos":" foto")+(nc?" · "+nc+" sem legenda":" · todas com legenda");changed()});
 $("photos").addEventListener("click",function(ev){var b=ev.target.closest("button[data-act]");if(!b)return;var id=b.closest(".ph").dataset.id;var i=S.photos.findIndex(function(x){return x.id===id});var a=b.dataset.act;
-  if(a==="del"){try{URL.revokeObjectURL(urls[id])}catch(e){}delete urls[id];S.photos.splice(i,1)}
+  if(a==="edit"){openEditor(id);return}
+  if(a==="del"){try{URL.revokeObjectURL(urls[id])}catch(e){}delete urls[id];S.photos.splice(i,1);idbDel("ph:"+id)}
   else{var j=a==="up"?i-1:i+1;if(j<0||j>=S.photos.length)return;var t=S.photos[i];S.photos[i]=S.photos[j];S.photos[j]=t}
   renderPhotos();changed()});
 var dragId=null;
@@ -522,10 +638,11 @@ function loadBitmap(file){
   return imgEl(file);
 }
 function imgEl(file){return new Promise(function(res,rej){var i=new Image();var u=URL.createObjectURL(file);i.onload=function(){res(i)};i.onerror=function(){rej(new Error("formato"))};i.src=u})}
-function processFile(file){return loadBitmap(file).then(function(bm){
+function processFile(file){return readExifDate(file).then(function(dt){return processBitmap(file,dt)})}
+function processBitmap(file,dt){return loadBitmap(file).then(function(bm){
   var w=bm.width,hh=bm.height,m=1600,k=Math.min(1,m/Math.max(w,hh));var cw=Math.round(w*k),ch=Math.round(hh*k);
   var cv=document.createElement("canvas");cv.width=cw;cv.height=ch;var x=cv.getContext("2d");x.fillStyle="#fff";x.fillRect(0,0,cw,ch);x.drawImage(bm,0,0,cw,ch);
-  return new Promise(function(res){cv.toBlob(function(b){res({id:"p"+Date.now().toString(36)+Math.random().toString(36).slice(2,7),blob:b,w:cw,h:ch,cap:""})},"image/jpeg",0.85)});
+  return new Promise(function(res){cv.toBlob(function(b){if(bm.close)bm.close();res({id:newId("p"),blob:b,w:cw,h:ch,cap:"",dt:dt||"",_saved:false})},"image/jpeg",0.85)});
 })}
 function addFiles(list){var files=[].slice.call(list).filter(function(f){return /^image\//.test(f.type)||/\.(jpe?g|png|webp)$/i.test(f.name)});
   if(!files.length){status("Nenhuma imagem reconhecida. Use JPG ou PNG (fotos HEIC do iPhone precisam ser convertidas antes).","err");return}
@@ -556,6 +673,8 @@ function issues(){var o=[];
   if(!$("fRel").value.trim())o.push("O texto do relatório está vazio.");
   if(!S.photos.length)o.push("Nenhuma foto incluída.");
   var nc=S.photos.filter(function(p){return !p.cap.trim()}).length;if(nc)o.push(nc+" foto(s) sem legenda.");
+  if($("fData").value){var od=S.photos.filter(function(p){return p.dt&&!inPeriod(p.dt)}).length;if(od)o.push(od+" foto(s) com data da câmera fora do período da vistoria. Confira se são desta visita.")}
+  if(pendOn()){var pr=S.pend.rows;if(!pr.length)o.push("Quadro de pendências ativado, mas sem itens.");else{var pe=pr.filter(function(r){return !(r.desc||"").trim()}).length;if(pe)o.push(pe+" pendência(s) sem descrição.")}}
   if(!S.sigs.some(function(s){return s.on&&s.l1.trim()}))o.push("Nenhum assinante marcado.");
   return o}
 function renderIssues(){var o=issues();$("issues").innerHTML=o.length?o.map(function(x){return "<li>"+h(x)+"</li>"}).join(""):'<li class="allok">Tudo preenchido. Pode gerar o documento.</li>';renderSteps()}
@@ -585,8 +704,9 @@ function renderPreview(){var sh=$("sheet");var k=(sh.clientWidth||430)/210;sh.st
   idRows().forEach(function(r){x+='<tr><td>'+h(r[0])+'</td><td>'+ph(r[1],r[2])+'</td></tr>'});x+='</table>';
   x+='<div class="s">2. OBJETIVO</div>'+(paras($("fObj").value).map(function(p){return '<p class="tx">'+h(p)+'</p>'}).join("")||'<p class="tx"><span class="hl">[INDICAR OBJETIVO]</span></p>');
   x+='<div class="s">3. RELATÓRIO</div>'+(paras($("fRel").value).map(function(p){return '<p class="tx">'+h(p)+'</p>'}).join("")||'<p class="tx"><span class="hl">[DESCREVER A VISTORIA]</span></p>');
-  if(S.photos.length){x+='<div class="s">4. FOTOS</div><div class="fq fq-'+S.size+'">';
-    var lim=24;S.photos.slice(0,lim).forEach(function(p,i){x+='<div class="q"><div class="qd"><img src="'+urlOf(p)+'" alt=""></div><p class="cap"><b>Foto '+nn(i)+' -</b> '+(p.cap.trim()?h(p.cap.trim()):'<span class="hl">[INDICAR LEGENDA]</span>')+'</p></div>'});
+  if(pendOn())x+='<div class="s">4. PENDÊNCIAS</div>'+pendHTML();
+  if(S.photos.length){x+='<div class="s">'+secFotos()+'</div><div class="fq fq-'+S.size+'">';
+    var lim=24;S.photos.slice(0,lim).forEach(function(p,i){x+='<div class="q"><div class="qd"><img src="'+urlOf(p)+'" alt=""></div><p class="cap"><b>Foto '+nn(i)+' -</b> '+(capText(p)?h(capText(p)):'<span class="hl">[INDICAR LEGENDA]</span>')+'</p></div>'});
     x+='</div>';if(S.photos.length>lim)x+='<div class="more">+ '+(S.photos.length-lim)+' foto(s)</div>'}
   var dr=$("fDataRel").value||$("fData").value;
   x+='<div class="end"><p class="first">É o relatório.</p><p>'+h($("fLocal").value.trim()||"Curitiba")+', '+(dr?h(extenso(dr))+'.':'<span class="hl">[INDICAR DATA]</span>')+'</p>';
@@ -639,7 +759,7 @@ var PHB='<w:tcBorders><w:top w:val="single" w:sz="6" w:space="0" w:color="'+C_LI
 var NOB='<w:tcBorders><w:top w:val="nil"/><w:left w:val="nil"/><w:bottom w:val="nil"/><w:right w:val="nil"/></w:tcBorders>';
 function imgCell(p,i,w,cfg){var d=fit(p.w,p.h,cfg.box[0],cfg.box[1]),m=cfg.mar;
   return '<w:tc><w:tcPr><w:tcW w:w="'+w+'" w:type="dxa"/>'+PHB+'<w:shd w:val="clear" w:color="auto" w:fill="'+C_PHBG+'"/><w:tcMar><w:top w:w="'+m+'" w:type="dxa"/><w:left w:w="'+m+'" w:type="dxa"/><w:bottom w:w="'+m+'" w:type="dxa"/><w:right w:w="'+m+'" w:type="dxa"/></w:tcMar><w:vAlign w:val="center"/></w:tcPr>'+P(drawing("rIdFoto"+(i+1),9000+i,d[0],d[1],"Foto "+nn(i)),'<w:keepNext/><w:keepLines/>'+SPC(0,0,240,"auto")+'<w:jc w:val="center"/>')+'</w:tc>'}
-function capCell(p,i,w){var c=p.cap.trim();
+function capCell(p,i,w){var c=capText(p);
   return '<w:tc><w:tcPr><w:tcW w:w="'+w+'" w:type="dxa"/>'+NOB+'<w:tcMar><w:top w:w="0" w:type="dxa"/><w:left w:w="0" w:type="dxa"/><w:bottom w:w="0" w:type="dxa"/><w:right w:w="0" w:type="dxa"/></w:tcMar></w:tcPr>'+P(R("Foto "+nn(i)+" -",{semi:true,sz:10,color:C_NAVY})+R(" ",{sz:10})+(c?R(c,{sz:10}):R("[INDICAR LEGENDA]",{semi:true,sz:10,color:C_NAVY,hl:true})),SPC(4,13,230)+'<w:jc w:val="both"/>')+'</w:tc>'}
 function emptyCell(w){return '<w:tc><w:tcPr><w:tcW w:w="'+w+'" w:type="dxa"/>'+NOB+'</w:tcPr><w:p><w:pPr>'+SPC(0,0,20)+'</w:pPr></w:p></w:tc>'}
 function photoTable(){if(!S.photos.length)return "";var cfg=PHS[S.size]||PHS.L,tw=cfg.cols.reduce(function(a,b){return a+b},0);
@@ -665,7 +785,8 @@ function buildBody(){var b="";
   b+=head("1. IDENTIFICAÇÃO",true)+idTable(idRows());
   b+=head("2. OBJETIVO")+txt($("fObj").value,"INDICAR OBJETIVO");
   b+=head("3. RELATÓRIO")+txt($("fRel").value,"DESCREVER A VISTORIA");
-  if(S.photos.length)b+=head("4. FOTOS")+photoTable();
+  if(pendOn())b+=head("4. PENDÊNCIAS")+pendTable();
+  if(S.photos.length)b+=head(secFotos())+photoTable();
   b+=closing();
   return b}
 var NS='xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture"';
@@ -679,10 +800,12 @@ function footerXml(){var rp=RP({sz:9,color:C_SEC});
   return '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><w:ftr '+NS+'><w:p><w:pPr><w:pBdr><w:top w:val="single" w:sz="6" w:space="4" w:color="'+C_LINE+'"/></w:pBdr>'+SPC(0,0,220)+'<w:jc w:val="center"/>'+rp+'</w:pPr><w:r>'+rp+'<w:fldChar w:fldCharType="begin"/></w:r><w:r>'+rp+'<w:instrText xml:space="preserve"> PAGE </w:instrText></w:r><w:r>'+rp+'<w:fldChar w:fldCharType="separate"/></w:r><w:r>'+rp+'<w:t>1</w:t></w:r><w:r>'+rp+'<w:fldChar w:fldCharType="end"/></w:r></w:p></w:ftr>'}
 var SECT='<w:sectPr><w:headerReference w:type="default" r:id="rId24"/><w:footerReference w:type="default" r:id="rId25"/><w:pgSz w:w="11906" w:h="16838"/><w:pgMar w:top="2268" w:right="1077" w:bottom="1134" w:left="1701" w:header="567" w:footer="567" w:gutter="0"/><w:cols w:space="708"/><w:docGrid w:linePitch="360"/></w:sectPr>';
 function b64bin(s){var b=atob(s.split(",").pop()),u=new Uint8Array(b.length);for(var i=0;i<b.length;i++)u[i]=b.charCodeAt(i);return u}
-function buildDocx(){var zip;return JSZip.loadAsync(TPL,{base64:true}).then(function(z){zip=z;return Promise.all(["word/document.xml","word/_rels/document.xml.rels","docProps/core.xml","[Content_Types].xml","word/fontTable.xml"].map(function(f){return z.file(f).async("string")}))}).then(function(a){
+var PREP=[];
+function buildDocx(){return prepAll().then(function(pb){PREP=pb;status("Montando o documento…","");return buildDocxInner()})}
+function buildDocxInner(){var zip;return JSZip.loadAsync(TPL,{base64:true}).then(function(z){zip=z;return Promise.all(["word/document.xml","word/_rels/document.xml.rels","docProps/core.xml","[Content_Types].xml","word/fontTable.xml"].map(function(f){return z.file(f).async("string")}))}).then(function(a){
   var doc=a[0].replace(/<w:sectPr[\s\S]*<\/w:sectPr>/,SECT).replace("{{BODY}}",buildBody());
   var rels=a[1],add="";
-  S.photos.forEach(function(p,i){var fn="foto"+nn(i)+".jpg";zip.file("word/media/"+fn,p.blob);add+='<Relationship Id="rIdFoto'+(i+1)+'" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/image" Target="media/'+fn+'"/>'});
+  S.photos.forEach(function(p,i){var fn="foto"+nn(i)+".jpg";zip.file("word/media/"+fn,PREP[i]||p.blob);add+='<Relationship Id="rIdFoto'+(i+1)+'" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/image" Target="media/'+fn+'"/>'});
   rels=rels.replace("</Relationships>",add+"</Relationships>");
   zip.remove("word/media/image18.jpeg");
   zip.file("word/media/logo_tjpr.png",b64bin(LOGO_PNG));
@@ -700,16 +823,16 @@ var dl=null;
 function fname(ext){var n=$("fName").value.trim()||"Relatorio_de_Vistoria.docx";n=n.replace(/\.(docx|pdf)$/i,"");return n+"."+ext}
 var GBTN=["btnGen","btnGenTop","btnPdf","btnPdfTop","mPdf","mDocx"];
 function busy(on){GBTN.forEach(function(id){var b=$(id);if(b)b.disabled=on})}
-function deliver(builder,ext,label){
-  busy(true);status("Gerando "+label+"…","");
+function saveBlob(blob,n,label){var sz=" · "+fmtSize(blob.size);
   var inClaude=!!(window.claude&&window.claude.use);
-  var dlP=dl?Promise.resolve(dl):inClaude?window.claude.use("downloads").then(function(n){dl=n||null;return dl},function(){return null}):Promise.resolve(null);
-  Promise.all([builder(),dlP]).then(function(r){var blob=r[0],sv=r[1],n=fname(ext);
-    if(sv){status("Confirme o download na janela que abriu…","");return sv.save({filename:n,data:blob}).then(function(){status(label+" gerado: "+n,"ok")},function(e){var c=e&&e.code;status(c==="declined"?"Download cancelado.":c==="rate_limited"?"Já há uma confirmação aberta. Conclua-a e tente de novo.":c==="too_large"?"Arquivo grande demais para esta visualização. Reduza o número de fotos.":"Não foi possível salvar o arquivo ("+(c||"erro")+").","err")})}
-    if(inClaude){status("Download indisponível nesta visualização. Abra o gerador pelo link no navegador e gere de novo — o rascunho fica salvo.","err");return}
-    if(IOS){offerShare(blob,n,label);return}
-    var a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=n;document.body.appendChild(a);a.click();setTimeout(function(){URL.revokeObjectURL(a.href);a.remove()},4000);status(label+" gerado: "+n,"ok")
-  }).catch(function(e){status("Erro ao gerar: "+(e&&e.message||e),"err")}).then(function(){busy(false)})}
+  var dlP=dl?Promise.resolve(dl):inClaude?window.claude.use("downloads").then(function(x){dl=x||null;return dl},function(){return null}):Promise.resolve(null);
+  return dlP.then(function(sv){
+    if(sv){status("Confirme o download na janela que abriu…","");return sv.save({filename:n,data:blob}).then(function(){status(label+" gerado: "+n+sz,"ok")},function(e){var c=e&&e.code;status(c==="declined"?"Download cancelado.":c==="rate_limited"?"Já há uma confirmação aberta. Conclua-a e tente de novo.":c==="too_large"?"Arquivo grande demais para esta visualização. Use o peso Leve ou menos fotos.":"Não foi possível salvar o arquivo ("+(c||"erro")+").","err")})}
+    if(inClaude){status("Download indisponível nesta visualização. Abra o gerador pelo link no navegador e gere de novo — o relatório fica salvo.","err");return}
+    if(IOS){offerShare(blob,n,label+sz.replace(" · "," ("),true);return}
+    var a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=n;document.body.appendChild(a);a.click();setTimeout(function(){URL.revokeObjectURL(a.href);a.remove()},4000);status(label+" gerado: "+n+sz,"ok")})}
+function deliver(builder,ext,label){busy(true);status("Gerando "+label+"…","");
+  builder().then(function(blob){return saveBlob(blob,fname(ext),label)}).catch(function(e){status("Erro ao gerar: "+(e&&e.message||e),"err")}).then(function(){busy(false)})}
 function generate(){if(!window.JSZip){status("Não foi possível carregar o gerador de .docx. Verifique a conexão e recarregue a página.","err");return}deliver(buildDocx,"docx","Documento .docx")}
 function generatePdf(){if(!(window.jspdf&&window.jspdf.jsPDF)){status("Não foi possível carregar o gerador de PDF. Verifique a conexão e recarregue a página.","err");return}deliver(buildPdf,"pdf","PDF")}
 $("btnGen").onclick=generate;$("btnPdf").onclick=generatePdf;
@@ -721,7 +844,7 @@ function blobURL(b){return new Promise(function(res,rej){var r=new FileReader();
 function rgb(h){h=h.replace("#","");return [parseInt(h.slice(0,2),16),parseInt(h.slice(2,4),16),parseInt(h.slice(4,6),16)]}
 function buildPdf(){
   var J=window.jspdf&&window.jspdf.jsPDF;if(!J)return Promise.reject(new Error("biblioteca de PDF não carregada"));
-  return Promise.all(S.photos.map(function(p){return blobURL(p.blob)})).then(function(imgs){
+  return prepAll().then(function(pb){status("Montando o PDF…","");return Promise.all(pb.map(blobURL))}).then(function(imgs){
   var doc=new J({unit:"mm",format:"a4",compress:true});
   doc.addFileToVFS("DIN-Regular.ttf",FONT_REG);doc.addFont("DIN-Regular.ttf","DIN","normal");
   doc.addFileToVFS("DIN-SemiBold.ttf",FONT_SEMI);doc.addFont("DIN-SemiBold.ttf","DIN","bold");
@@ -776,10 +899,27 @@ function buildPdf(){
     ps.forEach(function(p){flow([{t:p}],{size:11,line:14.3,align:"justify",widow:true});y+=6*PT})}
   head("2. OBJETIVO");body($("fObj").value,"INDICAR OBJETIVO");
   head("3. RELATÓRIO");body($("fRel").value,"DESCREVER A VISTORIA");
-  /* 4. FOTOS */
+  /* 4. PENDÊNCIAS (opcional) */
+  if(pendOn()){
+    var PW_=[10,32,60,43,16],pX=1.5,pY=1.06,center=function(j){return j===0||j===4};
+    var hdrRuns=PEND_H.map(function(t){return [{t:t,semi:true,color:NAVY}]});
+    var hdrH=pY*2+Math.max.apply(null,hdrRuns.map(function(r,j){return flow(r,{size:9,line:11,w:PW_[j]-2*pX,dry:true})}));
+    function pHdr(){var x=ML;hdrRuns.forEach(function(r,j){fill(PHBG);stroke(LINE,0.75);doc.rect(x,y,PW_[j],hdrH,"FD");flow(r,{size:9,line:11,x:x+pX,w:PW_[j]-2*pX,y:y+pY,align:center(j)?"center":"left"});x+=PW_[j]});y+=hdrH}
+    function cellRuns(r,i,j){var v=[nn(i),r.loc,r.desc,r.prov,r.fotos][j]||"";if(j===2&&!String(v).trim())return [{t:"[INDICAR DESCRIÇÃO]",semi:true,color:NAVY,hl:true}];return [{t:String(v)}]}
+    var plist=pendList(),firstH=pY*2+Math.max.apply(null,[0,1,2,3,4].map(function(j){return flow(cellRuns(plist[0],0,j),{size:9.5,line:12,w:PW_[j]-2*pX,dry:true})}));
+    if(!room(18*PT+15*PT+11.75*PT+hdrH+firstH))newPage();
+    head("4. PENDÊNCIAS");pHdr();
+    plist.forEach(function(r,i){var runs=[0,1,2,3,4].map(function(j){return cellRuns(r,i,j)});
+      var rh=pY*2+Math.max.apply(null,runs.map(function(rr,j){return flow(rr,{size:9.5,line:12,w:PW_[j]-2*pX,dry:true})}));
+      if(!room(rh)){newPage();pHdr()}
+      var x=ML;runs.forEach(function(rr,j){stroke(LINE,0.75);doc.rect(x,y,PW_[j],rh,"S");flow(rr,{size:9.5,line:12,x:x+pX,w:PW_[j]-2*pX,y:y+pY,align:center(j)?"center":"left"});x+=PW_[j]});y+=rh});
+    y+=4*PT;
+  }
+
+  /* FOTOS */
   if(S.photos.length){
     var cfg={L:{x:[ML],w:161,box:[154,118],h:125},M:{x:[ML+7],w:147,box:[140,90],h:97},S:{x:[ML,ML+82],w:79,box:[74,56],h:61}}[S.size]||null;cfg=cfg||{x:[ML],w:161,box:[154,118],h:125};
-    function capRuns(p,i){var c=p.cap.trim();return [{t:"Foto "+nn(i)+" -",semi:true,color:NAVY}].concat(c?[{t:c}]:[ind("LEGENDA")])}
+    function capRuns(p,i){var c=capText(p);return [{t:"Foto "+nn(i)+" -",semi:true,color:NAVY}].concat(c?[{t:c}]:[ind("LEGENDA")])}
     function capH(p,i){return flow(capRuns(p,i),{size:10,line:11.5,w:cfg.w,dry:true})}
     function quadro(p,i,x){fill(PHBG);stroke(LINE,0.75);doc.rect(x,y,cfg.w,cfg.h,"FD");
       var k=Math.min(cfg.box[0]/p.w,cfg.box[1]/p.h),iw=p.w*k,ih=p.h*k;
@@ -788,7 +928,7 @@ function buildPdf(){
     var step=S.size==="S"?2:1,first=true;
     for(var i=0;i<S.photos.length;i+=step){var ch=capH(S.photos[i],i);if(step===2&&S.photos[i+1])ch=Math.max(ch,capH(S.photos[i+1],i+1));
       var hh=cfg.h+4*PT+ch;
-      if(first){if(!room(18*PT+15*PT+11.75*PT+hh))newPage();head("4. FOTOS");first=false}
+      if(first){if(!room(18*PT+15*PT+11.75*PT+hh))newPage();head(secFotos());first=false}
       need(hh);quadro(S.photos[i],i,cfg.x[0]);if(step===2&&S.photos[i+1])quadro(S.photos[i+1],i+1,cfg.x[1]);
       y+=hh+14*PT}
   }
@@ -809,16 +949,137 @@ function buildPdf(){
   return doc.output("blob");
   })}
 
-/* ---------- persistence (IndexedDB, por navegador) ---------- */
-var idb=null;
+
+/* ---------- persistência: vários relatórios (IndexedDB, por aparelho) ----------
+   kv "index" = lista de relatórios · "rep:<id>" = dados do relatório (sem imagens)
+   "ph:<idFoto>" = {blob, orig} gravado uma vez · "cur" = relatório aberto */
+var idb=null,CUR=null,INDEX=[];
 function openIdb(){return new Promise(function(res){try{var r=indexedDB.open("relatorio_vistoria",1);r.onupgradeneeded=function(){r.result.createObjectStore("kv")};r.onsuccess=function(){res(r.result)};r.onerror=function(){res(null)}}catch(e){res(null)}})}
-function idbPut(k,v){return new Promise(function(res){if(!idb)return res(false);try{var t=idb.transaction("kv","readwrite");t.objectStore("kv").put(v,k);t.oncomplete=function(){res(true)};t.onerror=function(){res(false)}}catch(e){res(false)}})}
+function idbPut(k,v){return new Promise(function(res){if(!idb)return res(false);try{var t=idb.transaction("kv","readwrite");t.objectStore("kv").put(v,k);t.oncomplete=function(){res(true)};t.onerror=t.onabort=function(){res(false)}}catch(e){res(false)}})}
 function idbGet(k){return new Promise(function(res){if(!idb)return res(null);try{var r=idb.transaction("kv").objectStore("kv").get(k);r.onsuccess=function(){res(r.result||null)};r.onerror=function(){res(null)}}catch(e){res(null)}})}
-var saveT=null;
-function snapshot(){var f={};F.forEach(function(k){f[k]=$(k).value});return {reg:S.reg,com:S.com,ed:S.ed,size:S.size,objKind:S.objKind,disc:S.disc,cEnd:S.cEnd,cSit:S.cSit,f:f,nameTouched:nameTouched,dataRelTouched:dataRelTouched,lastObjAuto:lastObjAuto,photos:S.photos.map(function(p){return {id:p.id,blob:p.blob,w:p.w,h:p.h,cap:p.cap}})}}
-function scheduleSave(){clearTimeout(saveT);$("saveState").textContent="Salvando…";saveT=setTimeout(function(){idbPut("draft",snapshot()).then(function(ok){$("saveState").textContent=ok?"Rascunho salvo neste navegador":"Rascunho não pôde ser salvo neste navegador"})},700)}
+function idbDel(k){return new Promise(function(res){if(!idb)return res(false);try{var t=idb.transaction("kv","readwrite");t.objectStore("kv").delete(k);t.oncomplete=function(){res(true)};t.onerror=function(){res(false)}}catch(e){res(false)}})}
+function newId(p){return (p||"r")+Date.now().toString(36)+Math.random().toString(36).slice(2,7)}
+function photoMeta(p){return {id:p.id,w:p.w,h:p.h,cap:p.cap,dt:p.dt||"",edit:p.edit||null,v:p.v||0}}
+function savePhotoBlob(p){return idbPut("ph:"+p.id,{blob:p.blob,orig:p.orig||null}).then(function(ok){if(ok)p._saved=true;return ok})}
+function snapshot(){var f={};F.forEach(function(k){f[k]=$(k).value});return {v:2,id:CUR,reg:S.reg,com:S.com,ed:S.ed,size:S.size,objKind:S.objKind,disc:S.disc,discLab:discLabel(),q:S.q,capDate:S.capDate,pend:S.pend,cEnd:S.cEnd,cSit:S.cSit,f:f,nameTouched:nameTouched,dataRelTouched:dataRelTouched,lastObjAuto:lastObjAuto,photos:S.photos.map(photoMeta),updated:Date.now()}}
+function metaOf(s){var f=s.f||{};return {id:s.id,obra:f.fObra||"",disc:s.discLab||"",data:f.fData||"",sei:f.fSei||"",n:(s.photos||[]).length,updated:s.updated||Date.now()}}
+function upsertMeta(s){var m=metaOf(s),i=INDEX.findIndex(function(x){return x.id===m.id});if(i>=0)INDEX[i]=m;else INDEX.push(m)}
+var persistAsked=false;
+function askPersist(){if(persistAsked)return;persistAsked=true;try{if(navigator.storage&&navigator.storage.persist)navigator.storage.persist().catch(function(){})}catch(e){}}
+var saving=Promise.resolve(),saveT=null;
+function saveNow(){clearTimeout(saveT);saving=saving.then(function(){if(!CUR)return false;
+  var un=S.photos.filter(function(p){return !p._saved});
+  return Promise.all(un.map(savePhotoBlob)).then(function(){var s=snapshot();upsertMeta(s);return Promise.all([idbPut("rep:"+CUR,s),idbPut("index",INDEX),idbPut("cur",CUR)])})
+    .then(function(r){var ok=r.every(Boolean);$("saveState").textContent=ok?"Salvo neste aparelho":"Não foi possível salvar neste navegador";if(ok)askPersist();return ok})}).catch(function(){return false});return saving}
+function scheduleSave(){clearTimeout(saveT);$("saveState").textContent="Salvando…";saveT=setTimeout(saveNow,700)}
 var pvT=null;
 function changed(){clearTimeout(pvT);pvT=setTimeout(function(){renderPreview();renderIssues()},150);scheduleSave()}
+window.addEventListener("pagehide",function(){saveNow()});
+document.addEventListener("visibilitychange",function(){if(document.visibilityState==="hidden")saveNow()});
+
+function applyState(d,photos){
+  Object.keys(urls).forEach(function(k){try{URL.revokeObjectURL(urls[k])}catch(e){}});urls={};prepCache={};
+  S.reg=(d&&d.reg)||"02";S.com=(d&&d.com)||"";S.ed=(d&&d.ed)||"0";S.size=(d&&d.size)||"L";S.objKind=(d&&d.objKind)||"acomp";S.disc=(d&&d.disc)||"civ";
+  S.cEnd=d?d.cEnd!==false:true;S.cSit=!!(d&&d.cSit);S.q=(d&&d.q)||"eq";S.capDate=!!(d&&d.capDate);
+  S.pend=(d&&d.pend)?JSON.parse(JSON.stringify(d.pend)):{on:false,rows:[]};
+  nameTouched=!!(d&&d.nameTouched);dataRelTouched=!!(d&&d.dataRelTouched);lastObjAuto=(d&&d.lastObjAuto)||"";
+  S.photos=photos||[];
+  F.forEach(function(k){$(k).value=""});
+  fillReg();fillCom();fillEd();renderCard();
+  $("selObj").value=S.objKind;syncTpl();syncDisc();$("cEnd").checked=S.cEnd;$("cSit").checked=S.cSit;syncSeg();syncQ();$("cCapDate").checked=S.capDate;$("cPend").checked=S.pend.on;
+  if(d&&d.f){F.forEach(function(k){if(d.f[k]!=null)$(k).value=d.f[k]});if(d.f.fUn2==null)unitDefaults();else migrateUnit()}
+  else{$("fFiscal").value=lsGet("rv_fiscal");unitDefaults();$("fData").value=todayISO();$("fDataRel").value=todayISO();$("fLocal").value="Curitiba";applyLocation()}
+  if(!$("fName").value)autoName();
+  $("btnObj").textContent="Restaurar texto do modelo";
+  renderSigs();renderPhotos();renderPend();renderPreview();renderIssues();status("","");
+}
+function loadReport(id){return idbGet("rep:"+id).then(function(rep){
+  if(!rep){CUR=newId();applyState(null,[]);return saveNow()}
+  return Promise.all((rep.photos||[]).map(function(m){return idbGet("ph:"+m.id).then(function(b){return b&&b.blob?Object.assign({},m,{blob:b.blob,orig:b.orig||null,_saved:true}):null})}))
+    .then(function(ph){CUR=id;applyState(rep,ph.filter(Boolean));return idbPut("cur",CUR)})})}
+function newReport(){return saveNow().then(function(){CUR=newId();applyState(null,[]);return saveNow()}).then(function(){toast("Novo relatório criado. Os anteriores continuam em “Meus relatórios”.")})}
+
+/* ---------- meus relatórios ---------- */
+function norm(s){return String(s||"").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"")}
+function repTitle(m){return m.obra||"Relatório sem obra definida"}
+function fmtTs(t){var d=new Date(t);return pad(d.getDate())+"/"+pad(d.getMonth()+1)+"/"+d.getFullYear()+" "+pad(d.getHours())+":"+pad(d.getMinutes())}
+function openReports(){saveNow().then(function(){$("repPanel").hidden=false;document.body.classList.add("rp-open");$("repSearch").value="";renderReports()})}
+function closeReports(){$("repPanel").hidden=true;document.body.classList.remove("rp-open")}
+function renderReports(){var q=norm($("repSearch").value);
+  var list=INDEX.slice().sort(function(a,b){return b.updated-a.updated}).filter(function(m){return !q||norm(repTitle(m)+" "+m.sei+" "+m.disc).indexOf(q)>=0});
+  $("repList").innerHTML=list.map(function(m){var cur=m.id===CUR;return '<li class="rep'+(cur?' cur':'')+'" data-id="'+h(m.id)+'"><div class="rep-t"><b>'+h(repTitle(m))+'</b>'+(cur?'<span class="pill ok">aberto</span>':'')+'</div><div class="rep-m">'+[m.disc,m.data?"vistoria "+br(m.data):"",m.sei?"SEI "+m.sei:"",m.n+(m.n===1?" foto":" fotos"),"editado em "+fmtTs(m.updated)].filter(Boolean).map(h).join(" · ")+'</div><div class="rep-a">'+(cur?'':'<button class="btn small primary" type="button" data-ra="open">Abrir</button>')+'<button class="btn small" type="button" data-ra="dup">Duplicar sem fotos</button><button class="btn small" type="button" data-ra="exp">Exportar backup</button><button class="btn small ghost danger" type="button" data-ra="del">Excluir</button></div></li>'}).join("")||'<li class="rep-empty">Nenhum relatório encontrado.</li>';
+  $("repCount").textContent=INDEX.length+(INDEX.length===1?" relatório salvo neste aparelho":" relatórios salvos neste aparelho")}
+function getRep(id){return id===CUR?saveNow().then(function(){return snapshot()}):idbGet("rep:"+id)}
+function deleteReport(id){return idbGet("rep:"+id).then(function(rep){var ps=(rep&&rep.photos)||[];return Promise.all(ps.map(function(m){return idbDel("ph:"+m.id)}).concat([idbDel("rep:"+id)]))}).then(function(){
+  INDEX=INDEX.filter(function(m){return m.id!==id});return idbPut("index",INDEX)}).then(function(){
+  if(id!==CUR)return;var next=INDEX.slice().sort(function(a,b){return b.updated-a.updated})[0];if(next)return loadReport(next.id);CUR=newId();applyState(null,[]);return saveNow()})}
+function dupReport(id){return getRep(id).then(function(rep){if(!rep)throw new Error("relatório não encontrado");var d=JSON.parse(JSON.stringify(rep));
+  d.id=newId();d.photos=[];d.f=d.f||{};d.f.fData=todayISO();d.f.fDataRel=todayISO();d.f.fData2="";d.f.fName="";d.nameTouched=false;d.dataRelTouched=false;d.updated=Date.now();
+  return saveNow().then(function(){upsertMeta(d);return Promise.all([idbPut("rep:"+d.id,d),idbPut("index",INDEX)])}).then(function(){return loadReport(d.id)}).then(function(){autoName();changed();toast("Cópia criada sem fotos, com a data de hoje.")})})}
+function exportReport(id){if(!window.JSZip){toast("Biblioteca de compactação indisponível. Abra o app com internet uma vez e tente de novo.");return}
+  status("Preparando backup…","");
+  getRep(id).then(function(rep){if(!rep)throw new Error("relatório não encontrado");var z=new JSZip();
+    return Promise.all((rep.photos||[]).map(function(m){var live=id===CUR?S.photos.find(function(p){return p.id===m.id}):null;return (live?Promise.resolve({blob:live.blob,orig:live.orig}):idbGet("ph:"+m.id)).then(function(b){if(!b)return;z.file("fotos/"+m.id+".jpg",b.blob);if(b.orig)z.file("originais/"+m.id+".jpg",b.orig)})}))
+      .then(function(){z.file("relatorio.json",JSON.stringify({app:"relatorio-vistoria",version:APP_VERSION,exported:new Date().toISOString(),rep:rep}));return z.generateAsync({type:"blob",compression:"STORE"})})
+      .then(function(blob){var m=metaOf(rep);return saveBlob(blob,"Backup_Vistoria_"+slug(m.obra||"relatorio")+"_"+(m.data?br(m.data).replace(/\//g,"."):"sem_data")+".zip","Backup")})
+  }).catch(function(e){status("Não foi possível exportar: "+(e&&e.message||e),"err")})}
+function importBackup(file){if(!window.JSZip){toast("Biblioteca de compactação indisponível. Abra o app com internet uma vez e tente de novo.");return}
+  if(!idb){toast("Este navegador não permite salvar dados (modo anônimo?).");return}
+  toast("Importando backup…");
+  JSZip.loadAsync(file).then(function(z){var jf=z.file("relatorio.json");if(!jf)throw new Error("o arquivo não é um backup do Relatório de Vistoria");
+    return jf.async("string").then(function(t){var j=JSON.parse(t);if(!j||j.app!=="relatorio-vistoria"||!j.rep)throw new Error("backup inválido");var rep=j.rep,nid=newId();
+      return Promise.all((rep.photos||[]).map(function(m){var fb=z.file("fotos/"+m.id+".jpg"),fo=z.file("originais/"+m.id+".jpg");if(!fb)return null;var npid=newId("p");
+        return Promise.all([fb.async("blob"),fo?fo.async("blob"):null]).then(function(b){return idbPut("ph:"+npid,{blob:new Blob([b[0]],{type:"image/jpeg"}),orig:b[1]?new Blob([b[1]],{type:"image/jpeg"}):null}).then(function(){return Object.assign({},m,{id:npid})})})}))
+      .then(function(ms){rep.photos=ms.filter(Boolean);rep.id=nid;rep.updated=Date.now();return saveNow().then(function(){upsertMeta(rep);return Promise.all([idbPut("rep:"+nid,rep),idbPut("index",INDEX)])}).then(function(){return loadReport(nid)}).then(function(){renderReports();toast("Backup importado: "+repTitle(metaOf(rep))+" ("+rep.photos.length+" fotos).")})})})})
+  .catch(function(e){toast("Não foi possível importar: "+(e&&e.message||e))})}
+$("btnReps").onclick=openReports;$("mReps").onclick=openReports;$("repClose").onclick=closeReports;
+$("btnNew").onclick=function(){newReport()};$("repNew").onclick=function(){newReport().then(closeReports)};
+$("repSearch").addEventListener("input",renderReports);
+$("repImport").onclick=function(){$("impIn").click()};
+$("impIn").addEventListener("change",function(){if(this.files&&this.files[0])importBackup(this.files[0]);this.value=""});
+$("repPanel").addEventListener("click",function(e){if(e.target===this)closeReports()});
+$("repList").addEventListener("click",function(e){var b=e.target.closest("[data-ra]");if(!b)return;var li=b.closest(".rep"),id=li.dataset.id,a=b.dataset.ra;
+  if(a==="open")saveNow().then(function(){return loadReport(id)}).then(closeReports);
+  else if(a==="dup")dupReport(id).then(closeReports).catch(function(er){toast("Não foi possível duplicar: "+er.message)});
+  else if(a==="exp")exportReport(id);
+  else if(a==="del")li.querySelector(".rep-a").innerHTML='<span class="confirm">Excluir este relatório e as fotos dele? Não dá para desfazer. <button class="btn small danger" type="button" data-ra="delok">Excluir</button><button class="btn small" type="button" data-ra="delno">Cancelar</button></span>';
+  else if(a==="delno")renderReports();
+  else if(a==="delok")deleteReport(id).then(function(){renderReports();toast("Relatório excluído.")})});
+
+/* ---------- peso das fotos no documento ---------- */
+var QUAL={leve:{dpi:150,q:0.68,hint:"Arquivo menor, indicado para relatórios com muitas fotos."},eq:{dpi:200,q:0.76,hint:"Bom equilíbrio entre nitidez e tamanho do arquivo."},alta:{dpi:300,q:0.88,hint:"Máxima nitidez; o arquivo fica bem maior."}};
+var BOXMM={L:[154,118],M:[140,90],S:[74,56]};
+var prepCache={};
+function syncQ(){[].forEach.call($("segQ").children,function(b){b.setAttribute("aria-pressed",b.dataset.v===S.q?"true":"false")});var n=S.photos.length;
+  $("qHint").textContent=QUAL[S.q].hint+(n>40&&S.q!=="leve"?" Com "+n+" fotos, prefira Leve.":"")}
+$("segQ").addEventListener("click",function(e){var b=e.target.closest("button");if(!b)return;S.q=b.dataset.v;syncQ();changed()});
+function prepPhoto(p){var Q=QUAL[S.q]||QUAL.eq,box=BOXMM[S.size]||BOXMM.L,k=Math.min(box[0]/p.w,box[1]/p.h),tw=Math.ceil(p.w*k/25.4*Q.dpi),key=p.id+"|"+(p.v||0)+"|"+p.blob.size+"|"+S.q+"|"+S.size;
+  if(prepCache[key])return Promise.resolve(prepCache[key]);
+  if(tw>=p.w*0.92&&S.q==="alta"){prepCache[key]=p.blob;return Promise.resolve(p.blob)}
+  tw=Math.max(200,Math.min(tw,p.w));var th=Math.max(1,Math.round(p.h*tw/p.w));
+  return loadBitmap(p.blob).then(function(bm){var cv=document.createElement("canvas");cv.width=tw;cv.height=th;var x=cv.getContext("2d");x.imageSmoothingEnabled=true;x.imageSmoothingQuality="high";x.drawImage(bm,0,0,tw,th);if(bm.close)bm.close();
+    return new Promise(function(res){cv.toBlob(function(b){var out=(b&&b.size<p.blob.size)?b:p.blob;prepCache[key]=out;res(out)},"image/jpeg",Q.q)})})}
+function prepAll(){var out=[],n=S.photos.length;return S.photos.reduce(function(pr,p,idx){return pr.then(function(){if(n>6)status("Preparando fotos "+(idx+1)+" de "+n+"…","");return prepPhoto(p).then(function(b){out.push(b)})})},Promise.resolve()).then(function(){return out})}
+function fmtSize(b){return b>=1048576?(b/1048576).toLocaleString("pt-BR",{maximumFractionDigits:1})+" MB":Math.max(1,Math.round(b/1024))+" KB"}
+
+/* ---------- data da foto (EXIF) ---------- */
+function readExifDate(file){if(!(/jpe?g/i.test(file.type)||/\.jpe?g$/i.test(file.name||"")))return Promise.resolve("");
+  return new Promise(function(res){try{var fr=new FileReader();fr.onload=function(){try{res(exifDate(new DataView(fr.result)))}catch(e){res("")}};fr.onerror=function(){res("")};fr.readAsArrayBuffer(file.slice(0,262144))}catch(e){res("")}})}
+function exifDate(v){if(v.byteLength<4||v.getUint16(0)!==0xFFD8)return "";var o=2;
+  while(o+10<v.byteLength){var m=v.getUint16(o);if((m&0xFF00)!==0xFF00)return "";var len=v.getUint16(o+2);
+    if(m===0xFFE1&&v.getUint32(o+4)===0x45786966)return tiffDate(v,o+10);if(m===0xFFDA)return "";o+=2+len}return ""}
+function tiffDate(v,t){var le=v.getUint16(t)===0x4949;function u16(p){return v.getUint16(p,le)}function u32(p){return v.getUint32(p,le)}
+  function ifd(off){var r={};if(t+off+2>v.byteLength)return r;var n=u16(t+off);for(var i=0;i<n;i++){var e=t+off+2+i*12;if(e+12>v.byteLength)break;r[u16(e)]={count:u32(e+4),val:e+8}}return r}
+  function str(en){var c=en.count,p=c>4?t+u32(en.val):en.val,s="";for(var i=0;i<c-1&&p+i<v.byteLength;i++)s+=String.fromCharCode(v.getUint8(p+i));return s}
+  var i0=ifd(u32(t+4)),d="";
+  if(i0[0x8769]){var ex=ifd(u32(i0[0x8769].val));if(ex[0x9003])d=str(ex[0x9003]);else if(ex[0x9004])d=str(ex[0x9004])}
+  if(!d&&i0[0x0132])d=str(i0[0x0132]);
+  var m=d.match(/^(\d{4}):(\d{2}):(\d{2})[ T](\d{2}):(\d{2})/);return m&&m[1]!=="0000"?m[1]+"-"+m[2]+"-"+m[3]+"T"+m[4]+":"+m[5]:""}
+function inPeriod(dt){var a=$("fData").value,b=$("fData2").value||a;if(!dt||!a)return true;var d=dt.slice(0,10);return d>=a&&d<=b}
+function dtBR(dt){return dt?br(dt.slice(0,10))+" "+dt.slice(11,16):""}
+function capText(p){var c=p.cap.trim();if(!c)return "";return c+(S.capDate&&p.dt?" ("+br(p.dt.slice(0,10))+")":"")}
+$("btnSortDt").onclick=function(){var nd=S.photos.filter(function(p){return !p.dt}).length;S.photos=S.photos.map(function(p,i){return {p:p,i:i}}).sort(function(a,b){var x=a.p.dt||"9999",y=b.p.dt||"9999";return x<y?-1:x>y?1:a.i-b.i}).map(function(o){return o.p});renderPhotos();changed();toast("Fotos ordenadas pela data da câmera"+(nd?" ("+nd+" sem data ficaram no fim).":"."))};
+$("cCapDate").onchange=function(){S.capDate=this.checked;changed()};
 
 /* ---------- events ---------- */
 $("selReg").onchange=function(){S.reg=this.value;S.com="";S.ed="0";fillCom();fillEd();renderCard();applyLocation();changed()};
@@ -830,15 +1091,10 @@ $("cEnd").onchange=function(){S.cEnd=this.checked;changed()};
 $("cSit").onchange=function(){S.cSit=this.checked;changed()};
 F.forEach(function(k){$(k).addEventListener("input",function(){if(k==="fName")nameTouched=true;if(k==="fFiscal"){try{localStorage.setItem("rv_fiscal",$("fFiscal").value)}catch(e){}}if(k==="fUn2"){try{localStorage.setItem("rv_un2",$("fUn2").value);localStorage.setItem("rv_un2_set","1")}catch(e){}}if(k==="fDataRel")dataRelTouched=true;
   if(k==="fData"&&!dataRelTouched)$("fDataRel").value=$("fData").value;
+  if(k==="fData"||k==="fData2")renderPhotos();
   if((k==="fObra"||k==="fData"||k==="fDiscOut")&&!nameTouched)autoName();
   if(k==="fObra"&&S.objKind!=="livre"&&isObjAuto())applyObj();
   changed()})});
-$("btnNew").onclick=function(){var w=$("newWrap");w.innerHTML='<span class="confirm">Apagar o rascunho atual? <button class="btn small danger" id="yesNew" type="button">Apagar</button><button class="btn small" id="noNew" type="button">Cancelar</button></span>';
-  $("yesNew").onclick=function(){Object.keys(urls).forEach(function(k){try{URL.revokeObjectURL(urls[k])}catch(e){}});urls={};S.photos=[];F.forEach(function(k){$(k).value=""});nameTouched=false;dataRelTouched=false;lastObjAuto="";$("fFiscal").value=lsGet("rv_fiscal");unitDefaults();$("fData").value=todayISO();$("fDataRel").value=todayISO();applyLocation();renderPhotos();restoreNew();changed();status("","")};
-  $("noNew").onclick=restoreNew};
-var btnNewHandler=$("btnNew").onclick;
-function restoreNew(){$("newWrap").innerHTML='<button class="btn ghost" id="btnNew" type="button">Novo relatório</button>';$("btnNew").onclick=btnNewHandler}
-
 var pvRO=window.ResizeObserver?new ResizeObserver(function(){var k=($("sheet").clientWidth||430)/210;$("sheet").style.setProperty("--k",k+"px")}):null;if(pvRO)pvRO.observe($("sheet"));
 
 /* ---------- PWA: instalar, offline, atualização, celular ---------- */
@@ -846,7 +1102,7 @@ var IOS=/iP(hone|ad|od)/.test(navigator.userAgent)||(navigator.platform==="MacIn
 var STANDALONE=(window.matchMedia&&matchMedia("(display-mode: standalone)").matches)||navigator.standalone===true;
 var MIME={pdf:"application/pdf",docx:"application/vnd.openxmlformats-officedocument.wordprocessingml.document"};
 /* iPhone/iPad: o download de arquivo gerado é pouco confiável (principalmente no app instalado); oferece Compartilhar/Salvar em Arquivos */
-function offerShare(blob,n,label){var ext=n.split(".").pop(),file=null;try{file=new File([blob],n,{type:MIME[ext]||blob.type})}catch(e){}
+function offerShare(blob,n,label,paren){if(paren)label+=")";var ext=n.split(".").pop(),file=null;try{file=new File([blob],n,{type:MIME[ext]||blob.type})}catch(e){}
   var s=$("genStatus");s.className="status ok";s.textContent=label+" pronto: "+n+" ";
   var b=document.createElement("button");b.type="button";b.className="btn primary small sharebtn";b.textContent="Salvar ou compartilhar";s.appendChild(b);
   b.onclick=function(){if(file&&navigator.canShare&&navigator.canShare({files:[file]})){navigator.share({files:[file],title:n}).catch(function(){})}
@@ -894,7 +1150,7 @@ $("segDisc").addEventListener("click",function(e){var b=e.target.closest("button
   if(S.objKind!=="livre"){if(was)applyObj();else $("btnObj").textContent="Substituir pelo texto do modelo"}
   if(!nameTouched)autoName();if(S.disc==="out")$("fDiscOut").focus();changed()});
 /* ---------- atualizar o app ---------- */
-var APP_VERSION="2026-11-25i";
+var APP_VERSION="2026-11-25j";
 function checkUpdate(){var b=$("btnUpd");
   if(!("serviceWorker" in navigator)||!navigator.serviceWorker.controller){toast("Recarregando a página…");setTimeout(function(){location.reload()},400);return}
   b.disabled=true;toast("Procurando atualização…");
@@ -906,17 +1162,125 @@ function checkUpdate(){var b=$("btnUpd");
       toast("Você já está na versão mais recente ("+APP_VERSION+").")})
   }).catch(function(){toast("Não foi possível verificar agora. Confira a conexão e tente de novo.")}).then(function(){b.disabled=false})}
 $("btnUpd").onclick=checkUpdate;$("verTxt").textContent=APP_VERSION;
+
+/* ---------- quadro de pendências (opcional) ---------- */
+function pendOn(){return !!(S.pend&&S.pend.on)}
+function secFotos(){return pendOn()?"5. FOTOS":"4. FOTOS"}
+function renderPend(){$("pendBox").hidden=!pendOn();var rows=S.pend.rows;
+  $("pendRows").innerHTML=rows.map(function(r,i){var emp=!(r.desc||"").trim();return '<div class="prow" data-i="'+i+'"><div class="prow-h"><b>Pendência '+nn(i)+'</b><span class="tools"><button class="btn small" type="button" data-pa="up" '+(i===0?"disabled":"")+' aria-label="Subir">↑</button><button class="btn small" type="button" data-pa="down" '+(i===rows.length-1?"disabled":"")+' aria-label="Descer">↓</button><button class="btn small ghost danger" type="button" data-pa="del">Excluir</button></span></div>'+
+    '<div class="grid"><label class="f">Local / ambiente<input type="text" data-pk="loc" value="'+h(r.loc)+'" placeholder="ex.: Sala de audiências 2"></label><label class="f">Fotos <span class="opt">(números)</span><input type="text" data-pk="fotos" value="'+h(r.fotos)+'" placeholder="ex.: 03, 05" inputmode="numeric"></label>'+
+    '<label class="f full">Descrição<textarea rows="2" data-pk="desc" class="'+(emp?"empty":"")+'" placeholder="O que foi constatado">'+h(r.desc)+'</textarea></label><label class="f full">Providência recomendada<textarea rows="2" data-pk="prov" placeholder="ex.: Refazer a vedação da calha e substituir o forro afetado">'+h(r.prov)+'</textarea></label></div></div>'}).join("")||'<p class="empty-ph">Nenhuma pendência ainda. Use o botão abaixo para incluir.</p>';
+  $("pendCount").textContent=rows.length?rows.length+(rows.length>1?" itens":" item"):""}
+$("cPend").onchange=function(){S.pend.on=this.checked;if(S.pend.on&&!S.pend.rows.length)S.pend.rows.push({loc:"",desc:"",prov:"",fotos:""});renderPend();changed()};
+$("btnPendAdd").onclick=function(){S.pend.rows.push({loc:"",desc:"",prov:"",fotos:""});renderPend();changed();var l=$("pendRows").lastElementChild;if(l){var f=l.querySelector("input");f&&f.focus()}};
+$("pendRows").addEventListener("input",function(e){var k=e.target.dataset.pk;if(!k)return;var i=+e.target.closest(".prow").dataset.i;S.pend.rows[i][k]=e.target.value;if(k==="desc")e.target.classList.toggle("empty",!e.target.value.trim());changed()});
+$("pendRows").addEventListener("click",function(e){var b=e.target.closest("[data-pa]");if(!b)return;var i=+b.closest(".prow").dataset.i,a=b.dataset.pa,r=S.pend.rows;
+  if(a==="del")r.splice(i,1);else{var j=a==="up"?i-1:i+1;if(j<0||j>=r.length)return;var t=r[i];r[i]=r[j];r[j]=t}renderPend();changed()});
+function pendList(){return S.pend.rows.length?S.pend.rows:[{loc:"",desc:"",prov:"",fotos:""}]}
+var PEND_H=["Nº","LOCAL","DESCRIÇÃO","PROVIDÊNCIA RECOMENDADA","FOTOS"];
+/* .docx */
+var PCOL=[567,1814,3402,2438,907];
+function pendTable(){var B='<w:tcBorders>'+["top","left","bottom","right"].map(function(s){return '<w:'+s+' w:val="single" w:sz="6" w:space="0" w:color="'+C_LINE+'"/>'}).join("")+'</w:tcBorders>';
+  function pp(runs,center){return P(runs,SPC(0,0,240)+(center?'<w:jc w:val="center"/>':''))}
+  function cell(w,inner,hdr){return '<w:tc><w:tcPr><w:tcW w:w="'+w+'" w:type="dxa"/>'+B+(hdr?'<w:shd w:val="clear" w:color="auto" w:fill="'+C_PHBG+'"/>':'')+'<w:vAlign w:val="'+(hdr?"center":"top")+'"/></w:tcPr>'+inner+'</w:tc>'}
+  function multi(v,center){return pp(String(v||"").split(/\n/).map(function(l,i){return (i?'<w:r><w:br/></w:r>':'')+R(l,{sz:9.5})}).join(""),center)}
+  var t='<w:tbl><w:tblPr><w:tblW w:w="'+BW+'" w:type="dxa"/><w:tblInd w:w="0" w:type="dxa"/><w:tblLayout w:type="fixed"/><w:tblCellMar><w:top w:w="60" w:type="dxa"/><w:left w:w="85" w:type="dxa"/><w:bottom w:w="60" w:type="dxa"/><w:right w:w="85" w:type="dxa"/></w:tblCellMar><w:tblLook w:val="0000" w:firstRow="0" w:lastRow="0" w:firstColumn="0" w:lastColumn="0" w:noHBand="1" w:noVBand="1"/></w:tblPr><w:tblGrid>'+PCOL.map(function(c){return '<w:gridCol w:w="'+c+'"/>'}).join("")+'</w:tblGrid>';
+  t+='<w:tr><w:trPr><w:cantSplit/><w:tblHeader/></w:trPr>'+PEND_H.map(function(x,i){return cell(PCOL[i],pp(R(x,{semi:true,sz:9,color:C_NAVY}),i===0||i===4),true)}).join("")+'</w:tr>';
+  pendList().forEach(function(r,i){var v=[nn(i),r.loc,r.desc,r.prov,r.fotos];
+    t+='<w:tr><w:trPr><w:cantSplit/></w:trPr>'+v.map(function(x,j){var inner=(j===2&&!String(x||"").trim())?pp(R("[INDICAR DESCRIÇÃO]",{semi:true,sz:9.5,color:C_NAVY,hl:true})):multi(x,j===0||j===4);return cell(PCOL[j],inner,false)}).join("")+'</w:tr>'});
+  return t+'</w:tbl>'}
+/* prévia */
+function pendHTML(){return '<table class="pt"><thead><tr>'+PEND_H.map(function(x){return '<th>'+x+'</th>'}).join("")+'</tr></thead><tbody>'+pendList().map(function(r,i){return '<tr><td class="c">'+nn(i)+'</td><td>'+h(r.loc)+'</td><td>'+((r.desc||"").trim()?h(r.desc):'<span class="hl">[INDICAR DESCRIÇÃO]</span>')+'</td><td>'+h(r.prov)+'</td><td class="c">'+h(r.fotos)+'</td></tr>'}).join("")+'</tbody></table>'}
+
+/* ---------- editor de fotos: marcar, girar e recortar (não destrutivo: guarda a original) ---------- */
+var ED=null,ED_COLORS=["#e11d2e","#ffd400","#ffffff","#1f6feb"];
+function edDims(){var b=ED.bm,r=ED.rot%180!==0;return {RW:r?b.height:b.width,RH:r?b.width:b.height}}
+function edFrame(){return ED.mode==="crop"?{x:0,y:0,w:1,h:1}:(ED.crop||{x:0,y:0,w:1,h:1})}
+function openEditor(id){var p=S.photos.find(function(x){return x.id===id});if(!p)return;
+  loadBitmap(p.orig||p.blob).then(function(bm){var e=p.edit||{};
+    ED={p:p,bm:bm,rot:e.rot||0,crop:e.crop?Object.assign({},e.crop):null,ann:e.ann?JSON.parse(JSON.stringify(e.ann)):[],tool:ED&&ED.tool||"arrow",color:ED&&ED.color||ED_COLORS[0],mode:"draw",drag:null,cdraft:null};
+    $("edTitle").textContent="Marcar foto "+nn(S.photos.indexOf(p));$("editor").hidden=false;document.body.classList.add("ed-open");edSyncUI();edLayout()})
+  .catch(function(){toast("Não foi possível abrir esta foto para edição.")})}
+function closeEditor(){$("editor").hidden=true;document.body.classList.remove("ed-open");$("edText").hidden=true;if(ED&&ED.bm&&ED.bm.close)ED.bm.close();ED=null}
+function edSyncUI(){[].forEach.call(document.querySelectorAll("#edTools [data-tool]"),function(b){b.setAttribute("aria-pressed",b.dataset.tool===ED.tool?"true":"false")});
+  [].forEach.call(document.querySelectorAll("#edColors [data-c]"),function(b){b.setAttribute("aria-pressed",b.dataset.c===ED.color?"true":"false")});
+  var cm=ED.mode==="crop";$("edDraw").hidden=cm;$("edCropBar").hidden=!cm;$("edUndo").disabled=!ED.ann.length;$("edCropDel").disabled=!ED.crop}
+function edLayout(){if(!ED)return;var st=$("edStage"),cv=$("edCanvas"),d=edDims(),f=edFrame(),fw=d.RW*f.w,fh=d.RH*f.h;
+  var mw=st.clientWidth-16,mh=st.clientHeight-16,k=Math.min(mw/fw,mh/fh);var dw=Math.max(50,Math.floor(fw*k)),dh=Math.max(50,Math.floor(fh*k)),dpr=Math.min(2,window.devicePixelRatio||1);
+  cv.style.width=dw+"px";cv.style.height=dh+"px";cv.width=Math.round(dw*dpr);cv.height=Math.round(dh*dpr);edDraw()}
+function edDrawBase(x,W,H,f){var d=edDims(),b=ED.bm,s=W/(d.RW*f.w);x.save();x.scale(s,s);x.translate(-f.x*d.RW,-f.y*d.RH);
+  if(ED.rot===90){x.translate(d.RW,0);x.rotate(Math.PI/2)}else if(ED.rot===180){x.translate(d.RW,d.RH);x.rotate(Math.PI)}else if(ED.rot===270){x.translate(0,d.RH);x.rotate(-Math.PI/2)}
+  x.drawImage(b,0,0);x.restore()}
+/* anotações em coordenadas 0–1 do quadro recortado; mp converte para pixels da tela atual */
+function edAnn(x,a,W,H,mp){var m=Math.min(W,H)*(mp.sc||1),lw=Math.max(2,0.008*m),col=a.c;
+  x.lineCap="round";x.lineJoin="round";
+  function path(){x.beginPath();if(a.t==="pen"){a.pts.forEach(function(q,i){var P=mp(q[0],q[1]);i?x.lineTo(P[0],P[1]):x.moveTo(P[0],P[1])})}
+    else{var A=mp(a.x1,a.y1),B=mp(a.x2,a.y2);if(a.t==="rect")x.rect(Math.min(A[0],B[0]),Math.min(A[1],B[1]),Math.abs(B[0]-A[0]),Math.abs(B[1]-A[1]));
+      else if(a.t==="ell")x.ellipse((A[0]+B[0])/2,(A[1]+B[1])/2,Math.max(1,Math.abs(B[0]-A[0])/2),Math.max(1,Math.abs(B[1]-A[1])/2),0,0,Math.PI*2);
+      else if(a.t==="arrow"){var ang=Math.atan2(B[1]-A[1],B[0]-A[0]),hl=Math.max(lw*4,0.04*m);x.moveTo(A[0],A[1]);x.lineTo(B[0],B[1]);x.moveTo(B[0],B[1]);x.lineTo(B[0]-hl*Math.cos(ang-0.45),B[1]-hl*Math.sin(ang-0.45));x.moveTo(B[0],B[1]);x.lineTo(B[0]-hl*Math.cos(ang+0.45),B[1]-hl*Math.sin(ang+0.45))}}}
+  if(a.t==="text"){var fs=Math.max(12,0.05*m),P=mp(a.x,a.y);x.font="700 "+fs+"px Barlow, Bahnschrift, Arial, sans-serif";x.textBaseline="middle";x.lineWidth=fs*0.22;x.strokeStyle="rgba(0,0,0,.6)";x.strokeText(a.txt,P[0],P[1]);x.fillStyle=col;x.fillText(a.txt,P[0],P[1]);return}
+  path();x.strokeStyle="rgba(0,0,0,.45)";x.lineWidth=lw+Math.max(2,lw*0.6);x.stroke();path();x.strokeStyle=col;x.lineWidth=lw;x.stroke()}
+function edDraw(){if(!ED)return;var cv=$("edCanvas"),x=cv.getContext("2d"),W=cv.width,H=cv.height,f=edFrame();x.clearRect(0,0,W,H);edDrawBase(x,W,H,f);
+  var c=ED.crop||{x:0,y:0,w:1,h:1},mp;
+  if(ED.mode==="crop"){mp=function(u,v){return [(c.x+u*c.w)*W,(c.y+v*c.h)*H]};mp.sc=Math.min(c.w,c.h)}else{mp=function(u,v){return [u*W,v*H]}}
+  ED.ann.forEach(function(a){edAnn(x,a,W,H,mp)});if(ED.drag&&ED.drag.a)edAnn(x,ED.drag.a,W,H,mp);
+  if(ED.mode==="crop"){var r=ED.cdraft||ED.crop;if(r){x.save();x.fillStyle="rgba(0,0,0,.55)";x.beginPath();x.rect(0,0,W,H);x.rect(r.x*W,r.y*H,r.w*W,r.h*H);x.fill("evenodd");x.strokeStyle="#fff";x.lineWidth=2;x.setLineDash([8,6]);x.strokeRect(r.x*W,r.y*H,r.w*W,r.h*H);x.restore()}}}
+function edPt(e){var r=$("edCanvas").getBoundingClientRect();return [Math.min(1,Math.max(0,(e.clientX-r.left)/r.width)),Math.min(1,Math.max(0,(e.clientY-r.top)/r.height))]}
+var edCv=$("edCanvas");
+edCv.addEventListener("pointerdown",function(e){if(!ED)return;e.preventDefault();var q=edPt(e);
+  if(ED.mode==="crop"){ED.drag={s:q};ED.cdraft={x:q[0],y:q[1],w:0,h:0};edCv.setPointerCapture(e.pointerId);return}
+  if(ED.tool==="text"){edTextAt(q,e);return}
+  var a=ED.tool==="pen"?{t:"pen",pts:[q],c:ED.color}:{t:ED.tool,x1:q[0],y1:q[1],x2:q[0],y2:q[1],c:ED.color};ED.drag={a:a};edCv.setPointerCapture(e.pointerId);edDraw()});
+edCv.addEventListener("pointermove",function(e){if(!ED||!ED.drag)return;var q=edPt(e);
+  if(ED.mode==="crop"){var s=ED.drag.s;ED.cdraft={x:Math.min(s[0],q[0]),y:Math.min(s[1],q[1]),w:Math.abs(q[0]-s[0]),h:Math.abs(q[1]-s[1])};edDraw();return}
+  var a=ED.drag.a;if(a.t==="pen")a.pts.push(q);else{a.x2=q[0];a.y2=q[1]}edDraw()});
+function edUp(){if(!ED||!ED.drag)return;var a=ED.drag.a;ED.drag=null;
+  if(a){var ok=a.t==="pen"?a.pts.length>2:(Math.abs(a.x2-a.x1)+Math.abs(a.y2-a.y1))>0.015;if(ok){if(a.t==="pen")a.pts=a.pts.filter(function(q,i){return i%2===0||i===a.pts.length-1}).map(function(q){return [+q[0].toFixed(4),+q[1].toFixed(4)]});ED.ann.push(a)}}
+  edSyncUI();edDraw()}
+edCv.addEventListener("pointerup",edUp);edCv.addEventListener("pointercancel",edUp);
+function edTextAt(q,e){var t=$("edText"),st=$("edStage").getBoundingClientRect();t.hidden=false;t.value="";t.style.left=Math.min(st.width-200,Math.max(4,e.clientX-st.left))+"px";t.style.top=Math.max(4,e.clientY-st.top-18)+"px";t.dataset.x=q[0];t.dataset.y=q[1];setTimeout(function(){t.focus()},0)}
+function edTextCommit(){var t=$("edText");if(t.hidden||!ED)return;var v=t.value.trim();t.hidden=true;if(v){ED.ann.push({t:"text",x:+t.dataset.x,y:+t.dataset.y,txt:v.slice(0,60),c:ED.color});edSyncUI();edDraw()}}
+$("edText").addEventListener("keydown",function(e){if(e.key==="Enter"){e.preventDefault();edTextCommit()}else if(e.key==="Escape"){e.stopPropagation();this.hidden=true}});
+$("edText").addEventListener("blur",edTextCommit);
+function edMapAnns(from,to){function fx(u){return (from.x+u*from.w-to.x)/to.w}function fy(v){return (from.y+v*from.h-to.y)/to.h}
+  ED.ann.forEach(function(a){if(a.pts)a.pts=a.pts.map(function(q){return [fx(q[0]),fy(q[1])]});if("x1" in a){a.x1=fx(a.x1);a.x2=fx(a.x2);a.y1=fy(a.y1);a.y2=fy(a.y2)}if(a.t==="text"){a.x=fx(a.x);a.y=fy(a.y)}})}
+function edRotate(cw){var rp=cw?function(u,v){return [1-v,u]}:function(u,v){return [v,1-u]};
+  ED.ann.forEach(function(a){if(a.pts)a.pts=a.pts.map(function(q){return rp(q[0],q[1])});if("x1" in a){var A=rp(a.x1,a.y1),B=rp(a.x2,a.y2);a.x1=A[0];a.y1=A[1];a.x2=B[0];a.y2=B[1]}if(a.t==="text"){var T=rp(a.x,a.y);a.x=T[0];a.y=T[1]}});
+  var c=ED.crop;if(c)ED.crop=cw?{x:1-(c.y+c.h),y:c.x,w:c.h,h:c.w}:{x:c.y,y:1-(c.x+c.w),w:c.h,h:c.w};
+  ED.rot=(ED.rot+(cw?90:270))%360;edLayout()}
+$("edTools").addEventListener("click",function(e){var b=e.target.closest("[data-tool]");if(!b)return;ED.tool=b.dataset.tool;edSyncUI()});
+$("edColors").addEventListener("click",function(e){var b=e.target.closest("[data-c]");if(!b)return;ED.color=b.dataset.c;edSyncUI()});
+$("edUndo").onclick=function(){ED.ann.pop();edSyncUI();edDraw()};
+$("edRotL").onclick=function(){edRotate(false)};$("edRotR").onclick=function(){edRotate(true)};
+$("edCrop").onclick=function(){ED.mode="crop";ED.cdraft=null;edSyncUI();edLayout()};
+$("edCropCancel").onclick=function(){ED.mode="draw";ED.cdraft=null;edSyncUI();edLayout()};
+$("edCropOk").onclick=function(){var r=ED.cdraft;if(!r||r.w<0.05||r.h<0.05){toast("Arraste sobre a foto para marcar a área que deve ficar.");return}var old=ED.crop||{x:0,y:0,w:1,h:1};edMapAnns(old,r);ED.crop=r;ED.mode="draw";ED.cdraft=null;edSyncUI();edLayout()};
+$("edCropDel").onclick=function(){if(!ED.crop)return;edMapAnns(ED.crop,{x:0,y:0,w:1,h:1});ED.crop=null;ED.mode="draw";ED.cdraft=null;edSyncUI();edLayout()};
+$("edReset").onclick=function(){ED.rot=0;ED.crop=null;ED.ann=[];ED.mode="draw";edSyncUI();edLayout();toast("Edições removidas. Toque em Salvar para voltar à foto original.")};
+$("edCancel").onclick=closeEditor;
+$("edSave").onclick=function(){var E=ED,p=E.p,clean=!E.rot&&!E.crop&&!E.ann.length;
+  if(clean){if(p.orig){p.blob=p.orig;p.orig=null;var b0=p.blob;loadBitmap(b0).then(function(bm){p.w=bm.width;p.h=bm.height;if(bm.close)bm.close();edFinish(p,null)})}else edFinish(p,null);return}
+  var d=edDims(),f=E.crop||{x:0,y:0,w:1,h:1},W=Math.round(d.RW*f.w),H=Math.round(d.RH*f.h),k=Math.min(1,1600/Math.max(W,H));W=Math.max(1,Math.round(W*k));H=Math.max(1,Math.round(H*k));
+  var cv=document.createElement("canvas");cv.width=W;cv.height=H;var x=cv.getContext("2d");x.fillStyle="#fff";x.fillRect(0,0,W,H);edDrawBase(x,W,H,f);var mp=function(u,v){return [u*W,v*H]};E.ann.forEach(function(a){edAnn(x,a,W,H,mp)});
+  cv.toBlob(function(b){if(!b){toast("Não foi possível salvar a edição.");return}if(!p.orig)p.orig=p.blob;p.blob=b;p.w=W;p.h=H;edFinish(p,{rot:E.rot,crop:E.crop,ann:E.ann})},"image/jpeg",0.86)};
+function edFinish(p,edit){p.edit=edit;p.v=(p.v||0)+1;p._saved=false;try{URL.revokeObjectURL(urls[p.id])}catch(e){}delete urls[p.id];closeEditor();renderPhotos();changed();toast(edit?"Foto atualizada. A original fica guardada para reeditar.":"Foto original restaurada.")}
+window.addEventListener("resize",function(){if(ED)edLayout()});
+document.addEventListener("keydown",function(e){if(!ED)return;if(e.key==="Escape"&&$("edText").hidden){closeEditor()}else if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==="z"&&$("edText").hidden){e.preventDefault();ED.ann.pop();edSyncUI();edDraw()}});
+
 /* ---------- init ---------- */
-function init(draft){
+function init(){
   try{var sg=JSON.parse(localStorage.getItem("rv_sigs")||"null");if(Array.isArray(sg)&&sg.length)S.sigs=sg}catch(e){}
-  if(draft){S.reg=draft.reg||S.reg;S.com=draft.com||"";S.ed=draft.ed||"0";S.size=draft.size||"L";S.objKind=draft.objKind||"acomp";S.disc=draft.disc||"civ";S.cEnd=draft.cEnd!==false;S.cSit=!!draft.cSit;nameTouched=!!draft.nameTouched;dataRelTouched=!!draft.dataRelTouched;lastObjAuto=draft.lastObjAuto||"";S.photos=(draft.photos||[]).filter(function(p){return p&&p.blob}).concat(S.photos)} /* mantém fotos adicionadas antes de o rascunho terminar de carregar */
-  fillReg();fillCom();fillEd();renderCard();
-  $("selObj").value=S.objKind;syncTpl();syncDisc();$("cEnd").checked=S.cEnd;$("cSit").checked=S.cSit;syncSeg();
-  if(draft&&draft.f){F.forEach(function(k){if(draft.f[k]!=null)$(k).value=draft.f[k]});if(draft.f.fUn2==null)unitDefaults();else migrateUnit()}
-  else{$("fFiscal").value=lsGet("rv_fiscal");unitDefaults();$("fData").value=todayISO();$("fDataRel").value=todayISO();$("fLocal").value="Curitiba";applyLocation()}
-  renderSigs();renderPhotos();renderPreview();renderIssues();
-}
-openIdb().then(function(d){idb=d;return idbGet("draft")}).then(function(d){init(d)},function(){init(null)});
+  var early;
+  openIdb().then(function(d){idb=d;return Promise.all([idbGet("index"),idbGet("cur"),idbGet("draft")])}).then(function(r){var idx=r[0],cur=r[1],draft=r[2];early=S.photos;
+    if(!idx){INDEX=[];CUR=newId();
+      if(draft){var ph=(draft.photos||[]).filter(function(p){return p&&p.blob}).map(function(p){return {id:p.id,blob:p.blob,w:p.w,h:p.h,cap:p.cap||"",dt:"",_saved:false}});applyState(draft,ph);return saveNow().then(function(ok){if(ok)return idbDel("draft")})}
+      applyState(null,[]);return saveNow()}
+    INDEX=idx;var id=(cur&&INDEX.some(function(m){return m.id===cur}))?cur:((INDEX.slice().sort(function(a,b){return b.updated-a.updated})[0])||{}).id;
+    if(!id){CUR=newId();applyState(null,[]);return saveNow()}
+    return loadReport(id)})
+  .catch(function(){if(!CUR){CUR=newId();applyState(null,[])}})
+  .then(function(){if(early&&early.length){S.photos=S.photos.concat(early.filter(function(p){return S.photos.indexOf(p)<0}));renderPhotos();changed()}})}
+init();
 if(window.claude&&window.claude.use){window.claude.use("downloads").then(function(n){dl=n||null},function(){dl=null})}
 
 })();

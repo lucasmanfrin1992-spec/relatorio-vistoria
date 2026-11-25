@@ -25,6 +25,13 @@ Campos obrigatórios vazios saem no documento como **[INDICAR …]** com fundo �
 ## Modelo visual
 Segue o Manual de Uso da marca TJPR: cabeçalho com a marca horizontal e o texto da unidade (editável no app), cores institucionais (#002a3a, #008c95), Identificação em tabela e quadro de fotos padronizado. O .docx usa a fonte Bahnschrift (instalada no Windows), com Arial como reserva; o PDF leva embutida a fonte livre Barlow (SIL Open Font License), de desenho semelhante ao DIN.
 
+## Recursos
+- **Meus relatórios:** vários relatórios salvos no aparelho; duplicar um anterior (sem fotos) para vistorias recorrentes; exportar e importar backup (.zip com texto e fotos).
+- **Marcar fotos:** setas, círculos, retângulos, caneta e texto; girar e recortar. A foto original fica guardada para reeditar.
+- **Data da foto:** lê a data gravada pela câmera, avisa quando a foto é de outro dia, ordena por data e pode mostrar a data na legenda.
+- **Peso das fotos:** Leve, Equilibrado ou Alta qualidade; as fotos são reduzidas na geração conforme o tamanho que ocupam na página.
+- **Quadro de pendências** (opcional): seção 4 com Nº, local, descrição, providência recomendada e fotos relacionadas.
+
 ## Privacidade
 Tudo roda no navegador. Nenhum dado ou foto é enviado a servidores: o rascunho, o fiscal e os assinantes ficam guardados apenas no navegador de quem usa. É necessário estar conectado à internet para carregar as bibliotecas de geração do .docx e do PDF.
 
