@@ -1,5 +1,5 @@
 /* Service worker do Relatório de Vistoria – funciona offline depois da primeira visita */
-const VERSION = "rv-2026-11-25e";
+const VERSION = "rv-2026-11-25f";
 const SHELL = ["./", "./index.html", "./manifest.webmanifest", "./icons/icon-192.png", "./icons/icon-512.png", "./icons/apple-touch-icon.png", "./icons/favicon-32.png", "./icons/favicon-64.png"];
 const LIBS = [
   "https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js",

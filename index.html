@@ -180,6 +180,7 @@ input:focus-visible,select:focus-visible,textarea:focus-visible,button:focus-vis
 .sheet .hd img{display:block;width:100%;height:100%}
 .sheet .un{position:absolute;right:0;bottom:calc(var(--k)*6.2);text-align:right;font-weight:600;font-size:calc(var(--k)*3.175);line-height:calc(var(--k)*3.88);color:#002a3a}
 .sheet .t1{font-weight:600;font-size:calc(var(--k)*6.35);line-height:calc(var(--k)*7.76);letter-spacing:calc(var(--k)*.18);color:#002a3a;margin:0 0 calc(var(--k)*1.41)}
+.sheet .st{font-size:calc(var(--k)*3.88);line-height:calc(var(--k)*4.94);color:#526a74;margin:calc(var(--k)*-0.7) 0 calc(var(--k)*1.41)}
 .sheet .bar{width:calc(var(--k)*35);height:calc(var(--k)*1.06);background:#008c95;margin:calc(var(--k)*2.12) 0 calc(var(--k)*4.23)}
 .sheet .s{font-weight:600;font-size:calc(var(--k)*4.23);line-height:calc(var(--k)*5.3);letter-spacing:calc(var(--k)*.18);color:#002a3a;border-bottom:calc(var(--k)*.26) solid #b7c1c6;padding-bottom:calc(var(--k)*1.06);margin:calc(var(--k)*6.35) 0 calc(var(--k)*2.82)}
 .sheet .s.f{margin-top:0}
@@ -297,7 +298,7 @@ input:focus-visible,select:focus-visible,textarea:focus-visible,button:focus-vis
       <label class="f">Contrato / Ata <span class="opt">(opcional)</span><input type="text" id="fContrato" placeholder="ex.: Contrato nº 000/2026"></label>
       <label class="f">Contratada <span class="opt">(opcional)</span><input type="text" id="fEmpresa"></label>
       <label class="f">Cabeçalho · linha 1 <span class="opt">(unidade)</span><input type="text" id="fUn1" maxlength="70"></label>
-      <label class="f">Cabeçalho · linha 2 <span class="opt">(opcional)</span><input type="text" id="fUn2" maxlength="70"></label>
+      <label class="f">Cabeçalho · linha 2 <span class="opt">(também vai abaixo do título)</span><input type="text" id="fUn2" maxlength="70"></label>
     </div>
     <div class="row">
       <label class="chk"><input type="checkbox" id="cEnd" checked> Incluir endereço no relatório</label>
@@ -544,7 +545,7 @@ function periodo(){var a=$("fData").value,b=$("fData2").value;if(!a)return "";re
 function paras(t){return t.split(/\n\s*\n/).map(function(x){return x.trim()}).filter(Boolean)}
 function renderPreview(){var sh=$("sheet");var k=(sh.clientWidth||430)/210;sh.style.setProperty("--k",k+"px");
   var u=unitLines();var x='<div class="hd"><img src="'+HDR_PNG+'" alt="Marca do TJPR"><div class="un">'+u.map(h).join("<br>")+'</div></div>';
-  x+='<div class="t1">RELATÓRIO DE VISTORIA</div><div class="bar"></div><div class="s f">1. IDENTIFICAÇÃO</div><table class="id">';
+  x+='<div class="t1">RELATÓRIO DE VISTORIA</div>'+(subTitle()?'<div class="st">'+h(subTitle())+'</div>':'')+'<div class="bar"></div><div class="s f">1. IDENTIFICAÇÃO</div><table class="id">';
   idRows().forEach(function(r){x+='<tr><td>'+h(r[0])+'</td><td>'+ph(r[1],r[2])+'</td></tr>'});x+='</table>';
   x+='<div class="s">2. OBJETIVO</div>'+(paras($("fObj").value).map(function(p){return '<p class="tx">'+h(p)+'</p>'}).join("")||'<p class="tx"><span class="hl">[INDICAR OBJETIVO]</span></p>');
   x+='<div class="s">3. RELATÓRIO</div>'+(paras($("fRel").value).map(function(p){return '<p class="tx">'+h(p)+'</p>'}).join("")||'<p class="tx"><span class="hl">[DESCREVER A VISTORIA]</span></p>');
@@ -559,6 +560,7 @@ function renderPreview(){var sh=$("sheet");var k=(sh.clientWidth||430)/210;sh.st
 /* ---------- DOCX · modelo visual TJPR 2026 (ver BRIEFING_modelo_relatorio_vistoria.md) ---------- */
 var C_NAVY="002A3A",C_TEAL="008C95",C_HL="EEB134",C_INK="222222",C_SEC="526A74",C_LINE="B7C1C6",C_IDL="D0D6D9",C_PHBG="E7EAEC";
 var BW=9128; /* largura útil 16,1 cm em twips */
+function subTitle(){return $("fUn2").value.trim()}
 function unitLines(){var a=[$("fUn1").value.trim(),$("fUn2").value.trim()].filter(Boolean);return a}
 /* propriedades de texto: semi=Bahnschrift SemiBold; sz em pt */
 function RP(o){o=o||{};var f=o.semi?"Bahnschrift SemiBold":"Bahnschrift";
@@ -569,8 +571,9 @@ function V(v,lab,o){o=o||{};return v?R(v,o):R("[INDICAR "+lab+"]",{sz:o.sz,semi:
 function P(runs,ppr,rp){return '<w:p><w:pPr>'+(ppr||"")+(rp?RP(rp):"")+'</w:pPr>'+runs+'</w:p>'}
 function SPC(b,a,line,rule){return '<w:spacing w:before="'+Math.round(b*20)+'" w:after="'+Math.round(a*20)+'" w:line="'+line+'" w:lineRule="'+(rule||"exact")+'"/>'}
 var TEXT_PPR='<w:widowControl/>'+SPC(0,6,286)+'<w:jc w:val="both"/>';
-function titleBlock(){
-  return P(R("RELATÓRIO DE VISTORIA",{semi:true,sz:18,color:C_NAVY,caps:true,sp:10}),'<w:keepNext/>'+SPC(0,4,440))+
+function titleBlock(){var st=subTitle();
+  return P(R("RELATÓRIO DE VISTORIA",{semi:true,sz:18,color:C_NAVY,caps:true,sp:10}),'<w:keepNext/>'+SPC(0,st?2:4,440))+
+    (st?P(R(st,{sz:11,color:C_SEC}),'<w:keepNext/>'+SPC(0,4,280)):"")+
     P("",'<w:keepNext/><w:pBdr><w:bottom w:val="single" w:sz="24" w:space="0" w:color="'+C_TEAL+'"/></w:pBdr>'+SPC(4,12,40)+'<w:ind w:left="0" w:right="7144"/>',{sz:1})}
 function head(t,first){return P(R(t,{semi:true,sz:12,color:C_NAVY,caps:true,sp:10}),'<w:keepNext/><w:keepLines/><w:pBdr><w:bottom w:val="single" w:sz="6" w:space="3" w:color="'+C_LINE+'"/></w:pBdr>'+SPC(first?0:18,8,300))}
 function idTable(rows){
@@ -720,7 +723,8 @@ function buildPdf(){
 
   header();
   /* título + barra */
-  var tl=22*PT;caps("RELATÓRIO DE VISTORIA",18,0.5,ML,y+tl*0.5+18*PT*0.36,NAVY);y+=tl+4*PT;
+  var tl=22*PT;caps("RELATÓRIO DE VISTORIA",18,0.5,ML,y+tl*0.5+18*PT*0.36,NAVY);var st=subTitle();
+  if(st){y+=tl+2*PT;flow([{t:st,color:SEC}],{size:11,line:14});y+=4*PT}else y+=tl+4*PT;
   y+=4*PT;fill(TEAL);doc.rect(ML,y+2*PT,35,3*PT,"F");y+=(2+3+12)*PT;
   /* 1. IDENTIFICAÇÃO */
   head("1. IDENTIFICAÇÃO",true);
